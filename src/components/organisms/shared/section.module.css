@@ -1,0 +1,26 @@
+/* Shared section card styles used by all 5 form sections */
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 24px;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-card);
+}
+
+.body {
+  padding: 24px;
+}
+
+.sectionTitle {
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  color: var(--color-text-primary) !important;
+  margin-bottom: 4px !important;
+}
+
+.sectionDescription {
+  color: var(--color-text-muted) !important;
+  font-size: 0.82rem !important;
+  margin-bottom: 24px !important;
+}

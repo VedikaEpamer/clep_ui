@@ -1,0 +1,8 @@
+/* AppButton – all overrides come from the consuming component via MUI sx.
+   This file handles structural layout only. */
+.button {
+  border-radius: var(--radius-sm) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  font-size: var(--font-size-base) !important;
+}

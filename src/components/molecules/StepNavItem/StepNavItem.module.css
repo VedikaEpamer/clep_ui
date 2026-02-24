@@ -1,0 +1,64 @@
+/* StepNavItem */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease;
+}
+
+.item--active {
+  background-color: var(--color-sidebar-active-bg);
+  cursor: pointer;
+}
+
+.item--complete {
+  cursor: pointer;
+}
+
+.item--inactive {
+  cursor: default;
+}
+
+.item--active:hover,
+.item--complete:hover {
+  background-color: var(--color-sidebar-hover-bg);
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepLabel {
+  font-size: 0.82rem !important;
+  line-height: 1.2 !important;
+}
+
+.stepLabel--active {
+  color: var(--color-white) !important;
+  font-weight: 700 !important;
+}
+
+.stepLabel--complete {
+  color: var(--color-sidebar-text) !important;
+  font-weight: 500 !important;
+}
+
+.stepLabel--inactive {
+  color: var(--color-sidebar-dim) !important;
+  font-weight: 500 !important;
+}
+
+.statusText {
+  font-size: var(--font-size-xs) !important;
+}
+
+.statusText--active {
+  color: var(--color-sidebar-muted) !important;
+}
+
+.statusText--complete {
+  color: var(--color-success-light) !important;
+}

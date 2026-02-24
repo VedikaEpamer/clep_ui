@@ -1,0 +1,20 @@
+/* CreateEventTemplate */
+.root {
+  display: flex;
+  height: 100vh;
+  background-color: var(--color-surface);
+  overflow: hidden;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.scrollBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 32px;
+}

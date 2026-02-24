@@ -1,0 +1,52 @@
+/* RegionAccordion */
+.accordion {
+  border: 1px solid var(--color-border-light) !important;
+  box-shadow: none !important;
+}
+
+.accordion::before {
+  display: none !important;
+}
+
+.summary {
+  padding: 0 16px !important;
+  min-height: 48px !important;
+}
+
+.summaryContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.regionLabel {
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.8px;
+}
+
+.selectedCount {
+  margin-left: auto;
+  margin-right: 16px;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+.details {
+  padding: 0 32px 8px !important;
+}
+
+.countryGrid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.countryItem {
+  width: 50%;
+  margin: 0 !important;
+  padding: 2px 0 !important;
+}
+
+.countryLabel {
+  font-size: 0.82rem !important;
+}

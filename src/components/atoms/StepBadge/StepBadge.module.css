@@ -1,0 +1,38 @@
+/* StepBadge */
+.badge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge--active {
+  background-color: var(--color-primary);
+}
+
+.badge--complete {
+  background-color: var(--color-success);
+}
+
+.badge--inactive {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.checkIcon {
+  font-size: 16px !important;
+  color: var(--color-white);
+}
+
+.number {
+  font-weight: 700;
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-white);
+}
+
+.number--inactive {
+  color: rgba(255, 255, 255, 0.45);
+}

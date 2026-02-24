@@ -1,0 +1,40 @@
+/* FormFooter */
+.root {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-footer);
+  flex-shrink: 0;
+}
+
+.stepIndicator {
+  color: var(--color-text-muted) !important;
+  font-weight: 500 !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.backBtn {
+  color: var(--color-text-muted) !important;
+  text-transform: none !important;
+}
+
+.backBtn:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.nextBtn {
+  background-color: var(--color-primary) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  padding: 8px 24px !important;
+}
+
+.nextBtn:hover {
+  background-color: var(--color-primary-hover) !important;
+}

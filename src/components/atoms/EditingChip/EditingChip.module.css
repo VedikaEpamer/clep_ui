@@ -1,0 +1,8 @@
+/* EditingChip */
+.chip {
+  background-color: var(--color-primary-light) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  height: 20px !important;
+}

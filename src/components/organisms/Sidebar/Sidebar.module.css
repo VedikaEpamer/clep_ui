@@ -1,0 +1,100 @@
+/* Sidebar */
+.root {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background-color: var(--color-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.brand {
+  padding: 20px 20px 12px;
+}
+
+.brandInner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logoCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.companyName {
+  color: var(--color-white);
+  font-weight: 800 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.1 !important;
+}
+
+.platformLabel {
+  color: var(--color-sidebar-muted);
+  font-size: var(--font-size-xs) !important;
+  letter-spacing: 1px;
+}
+
+.divider {
+  border-color: var(--color-sidebar-divider) !important;
+}
+
+.draftInfo {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eventName {
+  color: var(--color-white);
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  margin-top: 6px !important;
+}
+
+.eventId {
+  color: var(--color-sidebar-muted);
+  font-size: 0.75rem !important;
+}
+
+.progressWrapper {
+  padding: 16px 20px;
+}
+
+.stepList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.actionButtons {
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebarBtn {
+  color: var(--color-white) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+}
+
+.sidebarBtn:hover {
+  border-color: var(--color-white) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
