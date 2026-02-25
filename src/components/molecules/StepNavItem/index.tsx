@@ -19,10 +19,10 @@ export default function StepNavItem({ step, currentStep, onClick }: StepNavItemP
 
   return (
     <div
-      role={isActive || isComplete ? 'button' : undefined}
-      tabIndex={isActive || isComplete ? 0 : undefined}
-      onClick={() => (isActive || isComplete) && onClick(step.id)}
-      onKeyDown={(e) => e.key === 'Enter' && (isActive || isComplete) && onClick(step.id)}
+      role="button"
+      tabIndex={0}
+      onClick={() => onClick(step.id)}
+      onKeyDown={(e) => e.key === 'Enter' && onClick(step.id)}
       className={clsx(styles.item, {
         [styles['item--active']]: isActive,
         [styles['item--complete']]: isComplete && !isActive,

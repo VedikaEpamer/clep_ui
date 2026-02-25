@@ -69,9 +69,9 @@ export default function CreateEventPage() {
 
   const handleBack = () => dispatch(prevStep());
 
-  // Sidebar: only allow navigating back to already-visited steps
+  // Sidebar: navigate to any step
   const handleStepClick = (step: number) => {
-    if (step <= currentStep) dispatch(setStep(step));
+    dispatch(setStep(step));
   };
 
   const handleClose = () => {

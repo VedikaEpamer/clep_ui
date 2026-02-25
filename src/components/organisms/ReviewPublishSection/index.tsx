@@ -86,14 +86,16 @@ export default function ReviewPublishSection({
             <ReviewRow label={FIELD_LABELS.EVENT_ID} value={val(data.eventId)} />
             <ReviewRow label={FIELD_LABELS.EVENT_NAME} value={val(data.eventName)} />
             <ReviewRow label={FIELD_LABELS.CAT_CODE} value={val(data.catCode)} />
+            <ReviewRow label={FIELD_LABELS.CAT_PREMIUM_ALLOCATION} value={val(data.catPremiumAllocation)} />
             <ReviewRow label={FIELD_LABELS.EVENT_TYPE} value={val(data.eventType)} />
             <ReviewRow label={FIELD_LABELS.EVENT_SUB_TYPE} value={val(data.eventSubType)} />
+            <ReviewRow label={FIELD_LABELS.PRIMARY_PERIL} value={val(data.primaryPeril)} />
+            <ReviewRow label={FIELD_LABELS.BUSINESS_GROUPS} value={val(data.businessGroups)} />
             <ReviewRow label={FIELD_LABELS.EVENT_DATE} value={val(data.eventDate)} />
-            <ReviewRow label={FIELD_LABELS.AFFECTED_YEAR} value={val(data.affectedYear)} />
-            <ReviewRow label={FIELD_LABELS.REPORTING_CURRENCY} value={val(data.reportingCurrency)} />
-            <ReviewRow label={FIELD_LABELS.UNDERWRITING_YEAR} value={val(data.underwritingYear)} />
-            <ReviewRow label={FIELD_LABELS.CAT_PREMIUM_ALLOCATION} value={val(data.catPremiumAllocation)} />
-            <ReviewRow label={FIELD_LABELS.EVENT_DESCRIPTION} value={val(data.eventDescription)} />
+            <ReviewRow label={FIELD_LABELS.LOSS_START_DATE} value={val(data.lossStartDate)} />
+            <ReviewRow label={FIELD_LABELS.LOSS_END_DATE} value={val(data.lossEndDate)} />
+            <ReviewRow label={FIELD_LABELS.SHORT_DESCRIPTION} value={val(data.shortDescription)} />
+            <ReviewRow label={FIELD_LABELS.LONG_DESCRIPTION} value={val(data.longDescription)} />
           </div>
         </ReviewGroup>
 
