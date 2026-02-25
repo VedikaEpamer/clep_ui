@@ -19,6 +19,12 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* MUI Select placeholder (empty value MenuItem rendered in collapsed state) */
+.MuiSelect-select em {
+  color: var(--color-text-placeholder);
+  font-style: normal;
+}
+
 /* Scrollbar styling (webkit) */
 ::-webkit-scrollbar {
   width: 6px;

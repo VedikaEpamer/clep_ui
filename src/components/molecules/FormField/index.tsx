@@ -1,16 +1,26 @@
 import type { ReactNode } from 'react';
 import AppTextField, { type AppTextFieldProps } from '../../atoms/AppTextField';
+import AppSelect, { type AppSelectProps } from '../../atoms/AppSelect';
 import styles from './FormField.module.css';
 
-interface FormFieldProps extends AppTextFieldProps {
-  /** Static label rendered above the input */
+// ── Select variant ───────────────────────────────────────────────────────────
+interface FormSelectProps extends AppSelectProps {
   label: string;
-  /** MenuItem elements when used as a select */
+  select: true;
   children?: ReactNode;
 }
 
+// ── Plain input variant ──────────────────────────────────────────────────────
+interface FormInputProps extends AppTextFieldProps {
+  label: string;
+  select?: false;
+  children?: never;
+}
+
+type FormFieldProps = FormSelectProps | FormInputProps;
+
 /**
- * Molecule – stacks a static label above an AppTextField.
+ * Molecule – stacks a static label above either an AppSelect or AppTextField.
  *
  * Usage (plain input):
  *   <FormField label="Event Name" value={...} onChange={...} placeholder="..." />
@@ -29,11 +39,15 @@ interface FormFieldProps extends AppTextFieldProps {
  * Usage (multiline):
  *   <FormField label="Notes" multiline rows={3} value={...} onChange={...} />
  */
-export default function FormField({ label, children, ...rest }: FormFieldProps) {
+export default function FormField({ label, children, select, ...rest }: FormFieldProps) {
   return (
     <div className={styles.root}>
       <label className={styles.label}>{label}</label>
-      <AppTextField {...rest}>{children}</AppTextField>
+      {select ? (
+        <AppSelect {...(rest as AppSelectProps)}>{children}</AppSelect>
+      ) : (
+        <AppTextField {...(rest as AppTextFieldProps)} />
+      )}
     </div>
   );
 }

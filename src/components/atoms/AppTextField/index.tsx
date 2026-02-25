@@ -13,6 +13,7 @@ export interface AppTextFieldProps extends Omit<TextFieldProps, 'onChange'> {
  *   • fullWidth by default
  *   • simplified onChange(value: string) callback
  *   • readOnly shorthand prop
+ *   For select / dropdown fields use AppSelect instead.
  */
 export default function AppTextField({
   onChange,
