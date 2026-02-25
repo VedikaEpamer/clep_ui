@@ -4,10 +4,12 @@ import AppSelect, { type AppSelectProps } from '../../atoms/AppSelect';
 import styles from './FormField.module.css';
 
 // ── Select variant ───────────────────────────────────────────────────────────
-interface FormSelectProps extends AppSelectProps {
+interface FormSelectProps extends Omit<AppSelectProps, 'onChange'> {
   label: string;
   select: true;
   children?: ReactNode;
+  /** Single-value onChange – FormField selects always return a plain string */
+  onChange?: (value: string) => void;
 }
 
 // ── Plain input variant ──────────────────────────────────────────────────────

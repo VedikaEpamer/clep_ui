@@ -75,6 +75,12 @@ const createEventSlice = createSlice({
       state.isDirty = true;
     },
 
+    /** Set the full business groups array (multi-select) */
+    setBusinessGroups(state, action: PayloadAction<string[]>) {
+      state.formData.businessGroups = action.payload;
+      state.isDirty = true;
+    },
+
     /** Navigate to any step directly (e.g. scroll-spy or sidebar back-navigation) */
     setStep(state, action: PayloadAction<number>) {
       const target = action.payload;
@@ -127,6 +133,7 @@ export const {
   updateField,
   toggleRegion,
   togglePeril,
+  setBusinessGroups,
   setStep,
   nextStep,
   prevStep,

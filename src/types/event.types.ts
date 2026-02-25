@@ -22,7 +22,7 @@ export interface EventFormData {
   eventType: string;
   eventSubType: string;
   primaryPeril: string;
-  businessGroups: string;
+  businessGroups: string[];
   eventDate: string;
   lossStartDate: string;
   lossEndDate: string;
@@ -63,7 +63,7 @@ export const initialFormData: EventFormData = {
   eventType: '',
   eventSubType: '',
   primaryPeril: '',
-  businessGroups: '',
+  businessGroups: [],
   eventDate: '',
   lossStartDate: '',
   lossEndDate: '',

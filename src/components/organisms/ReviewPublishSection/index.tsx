@@ -90,7 +90,7 @@ export default function ReviewPublishSection({
             <ReviewRow label={FIELD_LABELS.EVENT_TYPE} value={val(data.eventType)} />
             <ReviewRow label={FIELD_LABELS.EVENT_SUB_TYPE} value={val(data.eventSubType)} />
             <ReviewRow label={FIELD_LABELS.PRIMARY_PERIL} value={val(data.primaryPeril)} />
-            <ReviewRow label={FIELD_LABELS.BUSINESS_GROUPS} value={val(data.businessGroups)} />
+            <ReviewRow label={FIELD_LABELS.BUSINESS_GROUPS} value={val(data.businessGroups.join(', '))} />
             <ReviewRow label={FIELD_LABELS.EVENT_DATE} value={val(data.eventDate)} />
             <ReviewRow label={FIELD_LABELS.LOSS_START_DATE} value={val(data.lossStartDate)} />
             <ReviewRow label={FIELD_LABELS.LOSS_END_DATE} value={val(data.lossEndDate)} />

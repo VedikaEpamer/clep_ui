@@ -17,6 +17,7 @@ import {
   updateField,
   toggleRegion,
   togglePeril,
+  setBusinessGroups,
   nextStep,
   prevStep,
   setStep,
@@ -55,6 +56,13 @@ export default function CreateEventPage() {
   const handlePerilToggle = useCallback(
     (peril: string) => {
       dispatch(togglePeril(peril));
+    },
+    [dispatch]
+  );
+
+  const handleBusinessGroupsChange = useCallback(
+    (values: string[]) => {
+      dispatch(setBusinessGroups(values));
     },
     [dispatch]
   );
@@ -140,6 +148,7 @@ export default function CreateEventPage() {
         <EventIdentitySection
           data={formData}
           onChange={handleFieldChange}
+          onBusinessGroupsChange={handleBusinessGroupsChange}
           isActive={currentStep === 1}
         />
       </div>

@@ -9,9 +9,9 @@ import {
 import type { ReactNode } from 'react';
 
 export interface AppSelectProps
-  extends Omit<SelectProps<string>, 'onChange' | 'input' | 'variant'> {
-  /** Simplified onChange – returns the string value directly */
-  onChange?: (value: string) => void;
+  extends Omit<SelectProps<string | string[]>, 'onChange' | 'input' | 'variant'> {
+  /** Simplified onChange – returns the string value (single) or string[] (multiple) */
+  onChange?: (value: string | string[]) => void;
   /** Helper / error text rendered below the select */
   helperText?: ReactNode;
   /** Stretch to fill the parent width (default: true) */
@@ -36,7 +36,7 @@ export default function AppSelect({
   sx,
   ...rest
 }: AppSelectProps) {
-  const handleChange = (e: SelectChangeEvent<string>) => {
+  const handleChange = (e: SelectChangeEvent<string | string[]>) => {
     onChange?.(e.target.value);
   };
 

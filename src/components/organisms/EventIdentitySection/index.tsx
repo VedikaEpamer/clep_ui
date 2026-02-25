@@ -1,6 +1,7 @@
 import { Grid, MenuItem } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
 import FormField from '../../molecules/FormField';
+import AppMultiSelect from '../../atoms/AppMultiSelect';
 import {
   STEP_LABELS,
   SECTION_LABELS,
@@ -23,6 +24,7 @@ import styles from './EventIdentitySection.module.css';
 interface EventIdentitySectionProps {
   data: EventFormData;
   onChange: (field: keyof EventFormData, value: string) => void;
+  onBusinessGroupsChange: (values: string[]) => void;
   isActive: boolean;
 }
 
@@ -30,6 +32,7 @@ interface EventIdentitySectionProps {
 export default function EventIdentitySection({
   data,
   onChange,
+  onBusinessGroupsChange,
   isActive,
 }: EventIdentitySectionProps) {
   const subTypes = data.eventType ? EVENT_SUB_TYPES[data.eventType] ?? [] : [];
@@ -149,17 +152,15 @@ export default function EventIdentitySection({
               </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.BUSINESS_GROUPS}
-                select
-                value={data.businessGroups}
-                onChange={(v) => onChange('businessGroups', v)}
-              >
-                <MenuItem value=""><em>{SELECT_DEFAULTS.BUSINESS_GROUPS}</em></MenuItem>
-                {BUSINESS_GROUPS.map((g) => (
-                  <MenuItem key={g} value={g}>{g}</MenuItem>
-                ))}
-              </FormField>
+              <div className={styles.fieldWrapper}>
+                <label className={styles.fieldLabel}>{FIELD_LABELS.BUSINESS_GROUPS}</label>
+                <AppMultiSelect
+                  options={BUSINESS_GROUPS}
+                  value={data.businessGroups}
+                  onChange={onBusinessGroupsChange}
+                  placeholder={SELECT_DEFAULTS.BUSINESS_GROUPS}
+                />
+              </div>
             </Grid>
 
             {/* Row 6: Event Date (Loss Occurrence) + Loss Start Date */}
