@@ -154,6 +154,19 @@ export const CAT_PREMIUM_OPTIONS = [
 
 export const REPORTING_CURRENCIES = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF'];
 
+export const BUSINESS_GROUPS = [
+  'Property',
+  'Casualty',
+  'Marine',
+  'Aviation',
+  'Energy',
+  'Life & Health',
+  'Cyber',
+  'Credit & Surety',
+  'Engineering',
+  'Other',
+];
+
 export const INDUSTRY_LOSS_SOURCES = [
   'PCS',
   'PERILS AG',

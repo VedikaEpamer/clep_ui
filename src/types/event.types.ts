@@ -21,11 +21,13 @@ export interface EventFormData {
   eventName: string;
   eventType: string;
   eventSubType: string;
-  eventDescription: string;
+  primaryPeril: string;
+  businessGroups: string;
   eventDate: string;
-  affectedYear: string;
-  reportingCurrency: string;
-  underwritingYear: string;
+  lossStartDate: string;
+  lossEndDate: string;
+  shortDescription: string;
+  longDescription: string;
 
   // Step 2 – Impact Regions & Perils
   impactedRegions: ImpactedLocation[];
@@ -60,11 +62,13 @@ export const initialFormData: EventFormData = {
   eventName: '',
   eventType: '',
   eventSubType: '',
-  eventDescription: '',
+  primaryPeril: '',
+  businessGroups: '',
   eventDate: '',
-  affectedYear: '',
-  reportingCurrency: '',
-  underwritingYear: '',
+  lossStartDate: '',
+  lossEndDate: '',
+  shortDescription: '',
+  longDescription: '',
   impactedRegions: [],
   perils: [],
   brokerEventId: '',

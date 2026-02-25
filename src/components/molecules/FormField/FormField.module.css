@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* MUI offsets helper text by 14px to align with the floating label notch.
+   Since FormField uses a static external label, reset it to 0. */
+.root :global(.MuiFormHelperText-root) {
+  margin-left: 0;
+}

@@ -79,11 +79,13 @@ export const FIELD_LABELS = {
   EVENT_NAME: 'Event Name *',
   EVENT_TYPE: 'Event Type *',
   EVENT_SUB_TYPE: 'Event Sub-Type *',
-  EVENT_DATE: 'Event Date *',
-  AFFECTED_YEAR: 'Affected Year *',
-  REPORTING_CURRENCY: 'Reporting Currency *',
-  UNDERWRITING_YEAR: 'Underwriting Year *',
-  EVENT_DESCRIPTION: 'Event Description',
+  PRIMARY_PERIL: 'Primary Peril *',
+  BUSINESS_GROUPS: 'Business Groups *',
+  EVENT_DATE: 'Event Date (Loss Occurrence) *',
+  LOSS_START_DATE: 'Loss Start Date',
+  LOSS_END_DATE: 'Loss End Date',
+  SHORT_DESCRIPTION: 'Short Description',
+  LONG_DESCRIPTION: 'Long Description',
 
   // Step 2
   IMPACTED_REGIONS: 'Impacted Regions *',
@@ -113,9 +115,8 @@ export const FIELD_LABELS = {
 export const PLACEHOLDERS = {
   CAT_CODE: 'e.g., CAT-2024-US-001',
   EVENT_NAME: 'e.g., Hurricane Milton',
-  AFFECTED_YEAR: 'e.g., 2026',
-  UNDERWRITING_YEAR: 'e.g., 2026',
-  EVENT_DESCRIPTION: 'Brief description of the event...',
+  SHORT_DESCRIPTION: 'Brief description of the event',
+  LONG_DESCRIPTION: 'Detailed description including scope, impact areas, and key details',
   BROKER_EVENT_ID: 'e.g., BRK-2026-001',
   MARKET_EVENT_ID: 'e.g., MKT-2026-001',
   CLIENT_EVENT_ID: 'e.g., CLT-2026-001',
@@ -127,6 +128,8 @@ export const PLACEHOLDERS = {
 
 // ── Select Default Options ────────────────────────────────────────────────────
 export const SELECT_DEFAULTS = {
+  PERIL: 'Select peril',
+  BUSINESS_GROUPS: 'Select business groups',
   PREMIUM_STATUS: 'Select premium status',
   EVENT_TYPE: 'Select event type',
   SUB_TYPE: 'Select sub-type',
