@@ -1,4 +1,48 @@
 /* ImpactRegionsSection */
+
+/* ── Selected chips bar ── */
+.selectedChipsBar {
+  border: 1px dashed var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  background: var(--color-surface-alt, #f9fafb);
+}
+
+.chipsBarLabel {
+  display: block;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text-muted) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 24px;
+}
+
+.selectedChip {
+  padding: 3px 10px;
+  background: rgba(21, 101, 192, 0.12);
+  border-radius: 12px;
+  font-size: 0.76rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.chipsEmpty {
+  color: var(--color-text-muted) !important;
+  font-style: italic;
+  font-size: 0.78rem !important;
+}
+
+/* ── Regions accordion header ── */
 .regionsHeader {
   display: flex;
   justify-content: space-between;

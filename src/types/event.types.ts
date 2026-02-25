@@ -1,3 +1,10 @@
+// ─── External Source Reference ─────────────────────────────────────────────
+export interface ExternalSource {
+  id: string;         // unique key (timestamp-based)
+  sourceType: string; // 'Broker' | 'Market' | 'Client' | ...
+  sourceId: string;   // the reference ID value
+}
+
 // ─── Event Form Data Types ────────────────────────────────────────────────────
 
 export interface ImpactedLocation {
@@ -29,6 +36,7 @@ export interface EventFormData {
   marketEventId: string;
   clientEventId: string;
   externalReference: string;
+  externalSources: ExternalSource[];
 
   // Step 4 – Industry Market Loss
   industrylossEstimate: string;
@@ -63,6 +71,7 @@ export const initialFormData: EventFormData = {
   marketEventId: '',
   clientEventId: '',
   externalReference: '',
+  externalSources: [],
   industrylossEstimate: '',
   industryLossSource: '',
   industryLossDate: '',

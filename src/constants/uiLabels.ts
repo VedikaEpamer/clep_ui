@@ -62,6 +62,11 @@ export const SECTION_LABELS = {
   DEADLINES_HEADING: 'Workflow Deadlines & Assignment',
   DEADLINES_DESCRIPTION:
     'Set key deadlines and assign the event to the appropriate analysts for tracking and escalation management.',
+
+  // Step 3 – External Sources sub-section
+  EXTERNAL_SOURCES_HEADING: 'External Sources',
+  EXTERNAL_SOURCES_DESCRIPTION:
+    'Add external reference IDs from brokers, markets, clients or other parties.',
 } as const;
 
 // ── Form Field Labels ─────────────────────────────────────────────────────────
@@ -129,6 +134,7 @@ export const SELECT_DEFAULTS = {
   LOSS_SOURCE: 'Select source',
   ANALYST: 'Select analyst',
   REVIEWER: 'Select reviewer',
+  SOURCE_TYPE: 'Select source type',
 } as const;
 
 // ── Helper Texts ──────────────────────────────────────────────────────────────
@@ -147,6 +153,9 @@ export const BUTTON_LABELS = {
   BACK: 'Back',
   NEXT: 'Next',
   SUBMIT: 'Submit',
+  PUBLISH: 'Publish Event',
+  ADD_SOURCE: 'Add Source',
+  REMOVE: 'Remove',
 } as const;
 
 // ── Progress ──────────────────────────────────────────────────────────────────
@@ -164,4 +173,44 @@ export const SIDEBAR_LABELS = {
 export const REGION_LABELS = {
   LOCATIONS_SELECTED: (n: number) => `${n} location${n !== 1 ? 's' : ''} selected`,
   SELECTED_COUNT: (n: number) => `${n} selected`,
+  STATES_SELECTED: (n: number) => `${n} state${n !== 1 ? 's' : ''}`,
+  PROVINCES_SELECTED: (n: number) => `${n} province${n !== 1 ? 's' : ''}`,
+  IMPACTED_REGIONS_CHIPS: 'Selected Regions',
 } as const;
+
+// ── External Sources (Step 3) ─────────────────────────────────────────────────
+export const EXTERNAL_SOURCE_LABELS = {
+  SECTION_TITLE: 'External Sources',
+  SECTION_DESCRIPTION: 'Add external reference IDs from brokers, markets, clients or other parties.',
+  SOURCE_TYPE: 'Source Type *',
+  SOURCE_ID: 'Source ID *',
+  ADD_BUTTON: 'Add Source',
+  REMOVE_BUTTON: 'Remove',
+  SUMMARY_TITLE: 'Added External Sources',
+  SUMMARY_EMPTY: 'No external sources added yet.',
+  COLUMN_SOURCE_TYPE: 'Source Type',
+  COLUMN_SOURCE_ID: 'Source ID',
+  COLUMN_ACTIONS: 'Actions',
+  SELECT_SOURCE_TYPE: 'Select source type',
+  PLACEHOLDER_SOURCE_ID: 'e.g., EXT-2026-001',
+} as const;
+
+// ── Review & Publish ──────────────────────────────────────────────────────────
+export const REVIEW_LABELS = {
+  SECTION_TITLE: 'Review & Publish',
+  SECTION_DESCRIPTION:
+    'Review the information entered across all steps before publishing the event.',
+  PUBLISH_BUTTON: 'Publish Event',
+  SAVE_DRAFT_BUTTON: 'Save as Draft',
+  GROUP_EVENT_IDENTITY: 'Event Identity',
+  GROUP_IMPACT: 'Impact Regions & Perils',
+  GROUP_OTHER_IDS: 'Other IDs',
+  GROUP_INDUSTRY_LOSS: 'Industry Market Loss',
+  GROUP_DEADLINES: 'Deadlines & Tracking',
+  NOT_PROVIDED: '—',
+  REGIONS_LABEL: 'Impacted Regions',
+  PERILS_LABEL: 'Perils',
+} as const;
+
+// ── Select Defaults additions ─────────────────────────────────────────────────
+// (extend existing SELECT_DEFAULTS by re-exporting extras here if needed)

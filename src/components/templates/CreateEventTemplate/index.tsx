@@ -1,4 +1,4 @@
-import { useRef, useEffect, type ReactNode } from 'react';
+import { useRef, useEffect, useCallback, type ReactNode } from 'react';
 import Sidebar from '../../organisms/Sidebar';
 import FormHeader from '../../organisms/FormHeader';
 import FormFooter from '../../organisms/FormFooter';
@@ -42,9 +42,59 @@ export default function CreateEventTemplate({
   const onScrollStepRef = useRef(onScrollStep);
   onScrollStepRef.current = onScrollStep;
 
+  // While true the scroll-spy is suppressed (programmatic scroll in progress).
+  const suppressSpyRef = useRef(false);
+  // Debounce timer ref to detect when scroll animation ends.
+  const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Whether the next step change should trigger a programmatic scroll.
+  const pendingScrollRef = useRef(false);
+
+  /** Arm a programmatic scroll and suppress the spy until scrolling settles. */
+  const armScroll = useCallback(() => {
+    suppressSpyRef.current = true;
+    pendingScrollRef.current = true;
+  }, []);
+
+  const handleNextWithScroll = useCallback(() => {
+    armScroll();
+    onNext();
+  }, [onNext, armScroll]);
+
+  const handleBackWithScroll = useCallback(() => {
+    armScroll();
+    onBack();
+  }, [onBack, armScroll]);
+
+  const handleStepClickWithScroll = useCallback(
+    (step: number) => {
+      armScroll();
+      onStepClick(step);
+    },
+    [onStepClick, armScroll]
+  );
+
+  // Scroll to the active section when a button triggered the step change.
+  useEffect(() => {
+    if (!pendingScrollRef.current) return;
+    pendingScrollRef.current = false;
+    const section = scrollRef.current?.querySelector<HTMLElement>(
+      `[data-step="${currentStep}"]`
+    );
+    section?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentStep]);
+
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
+
+    // Re-enable the scroll-spy ~150 ms after scrolling stops.
+    const onScroll = () => {
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+      scrollEndTimerRef.current = setTimeout(() => {
+        suppressSpyRef.current = false;
+      }, 150);
+    };
+    scrollEl.addEventListener('scroll', onScroll, { passive: true });
 
     // Track the latest intersection ratio for every step section
     const ratioMap = new Map<number, number>();
@@ -55,6 +105,9 @@ export default function CreateEventTemplate({
           const step = Number((entry.target as HTMLElement).dataset.step);
           if (step) ratioMap.set(step, entry.intersectionRatio);
         });
+
+        // Suppress spy updates while a programmatic scroll is animating.
+        if (suppressSpyRef.current) return;
 
         // The step whose section is most visible wins
         let bestStep = 1;
@@ -70,7 +123,6 @@ export default function CreateEventTemplate({
       },
       {
         root: scrollEl,
-        // Fire callbacks at every 10 % increment so transitions feel immediate
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
       }
     );
@@ -78,7 +130,11 @@ export default function CreateEventTemplate({
     const sections = scrollEl.querySelectorAll<HTMLElement>('[data-step]');
     sections.forEach((s) => observer.observe(s));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      scrollEl.removeEventListener('scroll', onScroll);
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+    };
   }, []);
 
   return (
@@ -87,7 +143,7 @@ export default function CreateEventTemplate({
       <Sidebar
         currentStep={currentStep}
         eventId={eventId}
-        onStepClick={onStepClick}
+        onStepClick={handleStepClickWithScroll}
         onSaveDraft={onSaveDraft}
         onExportPDF={onExportPDF}
       />
@@ -106,7 +162,7 @@ export default function CreateEventTemplate({
           {children}
         </main>
 
-        <FormFooter currentStep={currentStep} onBack={onBack} onNext={onNext} />
+        <FormFooter currentStep={currentStep} onBack={handleBackWithScroll} onNext={handleNextWithScroll} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { EventFormData, ImpactedLocation } from '../../types/event.types';
+import type { EventFormData, ImpactedLocation, ExternalSource } from '../../types/event.types';
 import { initialFormData } from '../../types/event.types';
 import { TOTAL_STEPS } from '../../data/stepConfig';
 
@@ -97,6 +97,20 @@ const createEventSlice = createSlice({
       }
     },
 
+    /** Add an external source entry (Step 3) */
+    addExternalSource(state, action: PayloadAction<ExternalSource>) {
+      state.formData.externalSources.push(action.payload);
+      state.isDirty = true;
+    },
+
+    /** Remove an external source by its id */
+    removeExternalSource(state, action: PayloadAction<string>) {
+      state.formData.externalSources = state.formData.externalSources.filter(
+        (s) => s.id !== action.payload
+      );
+      state.isDirty = true;
+    },
+
     /** Mark form as being submitted */
     setSubmitting(state, action: PayloadAction<boolean>) {
       state.isSubmitting = action.payload;
@@ -116,6 +130,8 @@ export const {
   setStep,
   nextStep,
   prevStep,
+  addExternalSource,
+  removeExternalSource,
   setSubmitting,
   resetForm,
 } = createEventSlice.actions;

@@ -1,0 +1,101 @@
+/* OtherIDsSection */
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-border-light);
+  margin: 24px 0 16px;
+}
+
+.subSectionTitle {
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text-primary) !important;
+  margin-bottom: 4px !important;
+}
+
+.subSectionDesc {
+  font-size: 0.8rem !important;
+  color: var(--color-text-muted) !important;
+  margin-bottom: 16px !important;
+}
+
+/* ── Add source row ── */
+.addRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.addRow > :first-child { flex: 0 0 220px; }
+.addRow > :nth-child(2) { flex: 1; }
+
+.addBtn {
+  flex-shrink: 0;
+  margin-top: 7px !important;
+  height: 40px;
+  white-space: nowrap;
+}
+
+/* ── Summary table ── */
+.summaryWrapper {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.summaryHeader {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  background-color: var(--color-sidebar-bg);
+  padding: 8px 16px;
+}
+
+.summaryHeaderCell {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  color: var(--color-white) !important;
+  letter-spacing: 0.5px;
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: 160px 1fr 80px;
+  padding: 10px 16px;
+  align-items: center;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.summaryRow:hover {
+  background-color: var(--color-chip-hover-bg, #f5f5f5);
+}
+
+.summaryCell {
+  font-size: 0.83rem !important;
+  color: var(--color-text-primary) !important;
+}
+
+.typeBadge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background-color: rgba(21, 101, 192, 0.1);
+  color: var(--color-primary) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+}
+
+.removeBtn {
+  font-size: 0.75rem !important;
+  color: #c62828 !important;
+  padding: 2px 6px !important;
+  min-width: unset !important;
+}
+
+.emptyNote {
+  padding: 16px;
+  font-size: 0.83rem !important;
+  color: var(--color-text-muted) !important;
+  text-align: center;
+  font-style: italic;
+}

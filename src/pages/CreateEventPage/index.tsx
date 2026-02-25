@@ -6,6 +6,7 @@ import ImpactRegionsSection from '../../components/organisms/ImpactRegionsSectio
 import OtherIDsSection from '../../components/organisms/OtherIDsSection';
 import IndustryMarketLossSection from '../../components/organisms/IndustryMarketLossSection';
 import DeadlinesTrackingSection from '../../components/organisms/DeadlinesTrackingSection';
+import ReviewPublishSection from '../../components/organisms/ReviewPublishSection';
 import {
   useAppDispatch,
   useAppSelector,
@@ -21,8 +22,10 @@ import {
   setStep,
   setSubmitting,
   resetForm,
+  addExternalSource,
+  removeExternalSource,
 } from '../../store/slices/createEventSlice';
-import type { EventFormData } from '../../types/event.types';
+import type { EventFormData, ExternalSource } from '../../types/event.types';
 import { TOTAL_STEPS } from '../../data/stepConfig';
 
 /** Page – orchestrates the 5-step Create Event workflow via Redux Toolkit */
@@ -89,6 +92,26 @@ export default function CreateEventPage() {
     console.info('Export PDF', formData);
   };
 
+  const handleAddSource = useCallback(
+    (source: ExternalSource) => dispatch(addExternalSource(source)),
+    [dispatch]
+  );
+
+  const handleRemoveSource = useCallback(
+    (id: string) => dispatch(removeExternalSource(id)),
+    [dispatch]
+  );
+
+  const handlePublish = async () => {
+    dispatch(setSubmitting(true));
+    try {
+      console.info('Event published', formData);
+      // TODO: call publish API
+    } finally {
+      dispatch(setSubmitting(false));
+    }
+  };
+
   const handleSubmit = async () => {
     dispatch(setSubmitting(true));
     try {
@@ -132,6 +155,8 @@ export default function CreateEventPage() {
         <OtherIDsSection
           data={formData}
           onChange={handleFieldChange}
+          onAddSource={handleAddSource}
+          onRemoveSource={handleRemoveSource}
           isActive={currentStep === 3}
         />
       </div>
@@ -149,6 +174,13 @@ export default function CreateEventPage() {
           isActive={currentStep === 5}
         />
       </div>
+
+      {/* Review & Publish — not a numbered step, no data-step wrapper */}
+      <ReviewPublishSection
+        data={formData}
+        onPublish={handlePublish}
+        onSaveDraft={handleSaveDraft}
+      />
     </CreateEventTemplate>
   );
 }

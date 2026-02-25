@@ -1,22 +1,15 @@
 /* RegionAccordion */
+
+/* ── Region-level accordion ── */
 .accordion {
   border: 1px solid var(--color-border-light) !important;
   box-shadow: none !important;
 }
-
-.accordion::before {
-  display: none !important;
-}
+.accordion::before { display: none !important; }
 
 .summary {
   padding: 0 16px !important;
   min-height: 48px !important;
-}
-
-.summaryContent {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
 }
 
 .regionLabel {
@@ -33,20 +26,65 @@
 }
 
 .details {
-  padding: 0 32px 8px !important;
+  padding: 4px 0 8px !important;
+  border-top: 1px solid var(--color-border-light);
 }
 
-.countryGrid {
+/* ── Country-level nested accordion ── */
+.countryAccordion {
+  border: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--color-border-light) !important;
+}
+.countryAccordion:last-child { border-bottom: none !important; }
+
+.countrySummary {
+  padding: 0 8px 0 40px !important;
+  min-height: 40px !important;
+}
+
+.countryLabel {
+  font-size: 0.83rem !important;
+  color: var(--color-text-secondary);
+}
+
+.subCount {
+  margin-left: auto;
+  margin-right: 8px;
+  color: var(--color-primary) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+}
+
+/* ── State/Province grid ── */
+.stateDetails {
+  padding: 4px 8px 8px 56px !important;
+  background: var(--color-surface-alt, #f9fafb);
+}
+
+.stateGrid {
   display: flex;
   flex-wrap: wrap;
 }
 
-.countryItem {
-  width: 50%;
+.stateItem {
+  width: 33.33%;
   margin: 0 !important;
-  padding: 2px 0 !important;
+  padding: 1px 0 !important;
 }
 
-.countryLabel {
-  font-size: 0.82rem !important;
+.stateLabel {
+  font-size: 0.78rem !important;
+  color: var(--color-text-secondary);
 }
+
+/* ── Simple country row (no sub-regions) ── */
+.simpleCountryItem {
+  display: flex !important;
+  align-items: center;
+  padding: 4px 8px 4px 40px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid var(--color-border-light);
+  width: 100%;
+}
+.simpleCountryItem:last-child { border-bottom: none; }

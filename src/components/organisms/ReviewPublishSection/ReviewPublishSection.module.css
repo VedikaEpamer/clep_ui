@@ -1,0 +1,133 @@
+/* ReviewPublishSection */
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-primary);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.header {
+  background: var(--color-primary);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerTitle {
+  color: var(--color-white) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+}
+
+.headerDesc {
+  color: rgba(255,255,255,0.82) !important;
+  font-size: 0.82rem !important;
+  margin-left: auto;
+}
+
+.body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Review group ── */
+.group {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.groupTitle {
+  background: var(--color-surface-alt, #f5f7fa);
+  padding: 8px 16px;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  color: var(--color-primary) !important;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.row {
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-size: 0.72rem !important;
+  color: var(--color-text-muted) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.value {
+  font-size: 0.875rem !important;
+  color: var(--color-text-primary) !important;
+  font-weight: 500 !important;
+}
+
+.empty {
+  color: var(--color-text-muted) !important;
+  font-style: italic;
+}
+
+/* ── Chip list (perils / regions) ── */
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.chip {
+  padding: 3px 10px;
+  background: rgba(21, 101, 192, 0.1);
+  border-radius: 12px;
+  font-size: 0.78rem !important;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Footer actions ── */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0;
+  padding-top: 4px;
+}
+
+.publishBtn {
+  background-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+  font-weight: 700 !important;
+  padding: 10px 28px !important;
+}
+
+.publishBtn:hover {
+  background-color: var(--color-primary-hover, #0d47a1) !important;
+}
+
+.draftBtn {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
