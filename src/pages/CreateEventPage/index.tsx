@@ -154,7 +154,6 @@ export default function CreateEventPage() {
       <div data-step={3}>
         <OtherIDsSection
           data={formData}
-          onChange={handleFieldChange}
           onAddSource={handleAddSource}
           onRemoveSource={handleRemoveSource}
           isActive={currentStep === 3}

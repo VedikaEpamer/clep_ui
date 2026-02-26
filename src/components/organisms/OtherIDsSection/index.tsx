@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { Grid, TextField, MenuItem, Typography, Button } from '@mui/material';
+import { TextField, MenuItem, Typography, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
-import FormField from '../../molecules/FormField';
-import AppTextField from '../../atoms/AppTextField';
 import {
   STEP_LABELS,
   SECTION_LABELS,
-  FIELD_LABELS,
-  PLACEHOLDERS,
   EXTERNAL_SOURCE_LABELS,
   SELECT_DEFAULTS,
   BUTTON_LABELS,
@@ -21,7 +17,6 @@ import styles from './OtherIDsSection.module.css';
 
 interface OtherIDsSectionProps {
   data: EventFormData;
-  onChange: (field: keyof EventFormData, value: string) => void;
   onAddSource: (source: ExternalSource) => void;
   onRemoveSource: (id: string) => void;
   isActive: boolean;
@@ -30,7 +25,6 @@ interface OtherIDsSectionProps {
 /** Organism – Step 3: Other IDs + External Sources */
 export default function OtherIDsSection({
   data,
-  onChange,
   onAddSource,
   onRemoveSource,
   isActive,
@@ -65,49 +59,7 @@ export default function OtherIDsSection({
         />
 
         <div className={sectionStyles.fieldsBlock}>
-        <Grid container spacing={2.5}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField label={FIELD_LABELS.BROKER_EVENT_ID}>
-              <AppTextField
-                placeholder={PLACEHOLDERS.BROKER_EVENT_ID}
-                value={data.brokerEventId}
-                onChange={(v) => onChange('brokerEventId', v)}
-              />
-            </FormField>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField label={FIELD_LABELS.MARKET_EVENT_ID}>
-              <AppTextField
-                placeholder={PLACEHOLDERS.MARKET_EVENT_ID}
-                value={data.marketEventId}
-                onChange={(v) => onChange('marketEventId', v)}
-              />
-            </FormField>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField label={FIELD_LABELS.CLIENT_EVENT_ID}>
-              <AppTextField
-                placeholder={PLACEHOLDERS.CLIENT_EVENT_ID}
-                value={data.clientEventId}
-                onChange={(v) => onChange('clientEventId', v)}
-              />
-            </FormField>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField label={FIELD_LABELS.EXTERNAL_REFERENCE}>
-              <AppTextField
-                placeholder={PLACEHOLDERS.EXTERNAL_REFERENCE}
-                value={data.externalReference}
-                onChange={(v) => onChange('externalReference', v)}
-              />
-            </FormField>
-          </Grid>
-        </Grid>
-        </div>{/* end fieldsBlock */}
-
         {/* ── External Sources ── */}
-        <hr className={styles.divider} />
-
         <SectionDescription
           size="sm"
           title={SECTION_LABELS.EXTERNAL_SOURCES_HEADING}
@@ -184,6 +136,7 @@ export default function OtherIDsSection({
             ))
           )}
         </div>
+        </div>{/* end fieldsBlock */}
       </div>
     </section>
   );
