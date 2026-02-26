@@ -6,19 +6,6 @@
   margin: 24px 0 16px;
 }
 
-.subSectionTitle {
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
-  color: var(--color-text-primary) !important;
-  margin-bottom: 4px !important;
-}
-
-.subSectionDesc {
-  font-size: 0.8rem !important;
-  color: var(--color-text-muted) !important;
-  margin-bottom: 16px !important;
-}
-
 /* ── Add source row ── */
 .addRow {
   display: flex;

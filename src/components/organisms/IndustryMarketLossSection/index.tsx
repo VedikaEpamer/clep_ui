@@ -1,5 +1,7 @@
-import { Grid, TextField, MenuItem } from '@mui/material';
+import { Grid, MenuItem } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
+import SectionDescription from '../../molecules/SectionDescription';
+import FormField from '../../molecules/FormField';
 import {
   STEP_LABELS,
   SECTION_LABELS,
@@ -33,52 +35,49 @@ export default function IndustryMarketLossSection({
       />
 
       <div className={sectionStyles.body}>
-        <p className={sectionStyles.sectionTitle}>{SECTION_LABELS.INDUSTRY_LOSS_HEADING}</p>
-        <p className={sectionStyles.sectionDescription}>{SECTION_LABELS.INDUSTRY_LOSS_DESCRIPTION}</p>
+        <SectionDescription
+          title={SECTION_LABELS.INDUSTRY_LOSS_HEADING}
+          description={SECTION_LABELS.INDUSTRY_LOSS_DESCRIPTION}
+        />
 
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.INDUSTRY_LOSS_ESTIMATE}
               placeholder={PLACEHOLDERS.INDUSTRY_LOSS_ESTIMATE}
               value={data.industrylossEstimate}
-              onChange={(e) => onChange('industrylossEstimate', e.target.value)}
+              onChange={(v) => onChange('industrylossEstimate', v)}
               helperText={HELPER_TEXTS.INDUSTRY_LOSS_ESTIMATE}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              select
-              fullWidth
+            <FormField
               label={FIELD_LABELS.INDUSTRY_LOSS_SOURCE}
+              select
               value={data.industryLossSource}
-              onChange={(e) => onChange('industryLossSource', e.target.value)}
+              onChange={(v) => onChange('industryLossSource', v)}
             >
               <MenuItem value=""><em>{SELECT_DEFAULTS.LOSS_SOURCE}</em></MenuItem>
               {INDUSTRY_LOSS_SOURCES.map((s) => (
                 <MenuItem key={s} value={s}>{s}</MenuItem>
               ))}
-            </TextField>
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.INDUSTRY_LOSS_DATE}
               type="date"
               value={data.industryLossDate}
-              onChange={(e) => onChange('industryLossDate', e.target.value)}
-              slotProps={{ inputLabel: { shrink: true } }}
+              onChange={(v) => onChange('industryLossDate', v)}
               helperText={HELPER_TEXTS.INDUSTRY_LOSS_DATE}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.MARKET_SHARE}
               placeholder={PLACEHOLDERS.MARKET_SHARE_PCT}
               value={data.marketShare}
-              onChange={(e) => onChange('marketShare', e.target.value)}
+              onChange={(v) => onChange('marketShare', v)}
               helperText={HELPER_TEXTS.MARKET_SHARE}
             />
           </Grid>

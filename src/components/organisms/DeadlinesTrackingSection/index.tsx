@@ -1,5 +1,7 @@
-import { Grid, TextField, MenuItem } from '@mui/material';
+import { Grid, MenuItem } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
+import SectionDescription from '../../molecules/SectionDescription';
+import FormField from '../../molecules/FormField';
 import {
   STEP_LABELS,
   SECTION_LABELS,
@@ -32,67 +34,62 @@ export default function DeadlinesTrackingSection({
       />
 
       <div className={sectionStyles.body}>
-        <p className={sectionStyles.sectionTitle}>{SECTION_LABELS.DEADLINES_HEADING}</p>
-        <p className={sectionStyles.sectionDescription}>{SECTION_LABELS.DEADLINES_DESCRIPTION}</p>
+        <SectionDescription
+          title={SECTION_LABELS.DEADLINES_HEADING}
+          description={SECTION_LABELS.DEADLINES_DESCRIPTION}
+        />
 
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.LOSS_PICK_DEADLINE}
               type="date"
               value={data.lossPickDeadline}
-              onChange={(e) => onChange('lossPickDeadline', e.target.value)}
-              slotProps={{ inputLabel: { shrink: true } }}
+              onChange={(v) => onChange('lossPickDeadline', v)}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.FINAL_SUBMISSION_DEADLINE}
               type="date"
               value={data.finalSubmissionDeadline}
-              onChange={(e) => onChange('finalSubmissionDeadline', e.target.value)}
-              slotProps={{ inputLabel: { shrink: true } }}
+              onChange={(v) => onChange('finalSubmissionDeadline', v)}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              select
-              fullWidth
+            <FormField
               label={FIELD_LABELS.ASSIGNED_ANALYST}
+              select
               value={data.assignedAnalyst}
-              onChange={(e) => onChange('assignedAnalyst', e.target.value)}
+              onChange={(v) => onChange('assignedAnalyst', v)}
             >
               <MenuItem value=""><em>{SELECT_DEFAULTS.ANALYST}</em></MenuItem>
               {ANALYSTS.map((a) => (
                 <MenuItem key={a} value={a}>{a}</MenuItem>
               ))}
-            </TextField>
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <TextField
-              select
-              fullWidth
+            <FormField
               label={FIELD_LABELS.REVIEWER_NAME}
+              select
               value={data.reviewerName}
-              onChange={(e) => onChange('reviewerName', e.target.value)}
+              onChange={(v) => onChange('reviewerName', v)}
             >
               <MenuItem value=""><em>{SELECT_DEFAULTS.REVIEWER}</em></MenuItem>
               {ANALYSTS.map((a) => (
                 <MenuItem key={a} value={a}>{a}</MenuItem>
               ))}
-            </TextField>
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12 }}>
-            <TextField
-              fullWidth
+            <FormField
               label={FIELD_LABELS.NOTES}
               multiline
               rows={3}
               placeholder={PLACEHOLDERS.NOTES}
               value={data.notes}
-              onChange={(e) => onChange('notes', e.target.value)}
+              onChange={(v) => onChange('notes', v)}
             />
           </Grid>
         </Grid>

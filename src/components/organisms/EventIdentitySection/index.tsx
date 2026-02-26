@@ -1,5 +1,6 @@
 import { Grid, MenuItem } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
+import SectionDescription from '../../molecules/SectionDescription';
 import FormField from '../../molecules/FormField';
 import AppMultiSelect from '../../atoms/AppMultiSelect';
 import {
@@ -47,10 +48,11 @@ export default function EventIdentitySection({
 
       <div className={sectionStyles.body}>
         {/* ── Block 1: description ── */}
-        <div className={styles.descriptionBlock}>
-          <p className={sectionStyles.sectionTitle}>{SECTION_LABELS.EVENT_IDENTITY_HEADING}</p>
-          <p className={sectionStyles.sectionDescription}>{SECTION_LABELS.EVENT_IDENTITY_DESCRIPTION}</p>
-        </div>
+        <SectionDescription
+          bordered
+          title={SECTION_LABELS.EVENT_IDENTITY_HEADING}
+          description={SECTION_LABELS.EVENT_IDENTITY_DESCRIPTION}
+        />
 
         {/* ── Block 2: fields ── */}
         <div className={styles.fieldsBlock}>

@@ -1,6 +1,7 @@
 import { Chip, Typography } from '@mui/material';
 import clsx from 'clsx';
 import SectionHeader from '../../molecules/SectionHeader';
+import SectionDescription from '../../molecules/SectionDescription';
 import RegionAccordion from '../../molecules/RegionAccordion';
 import {
   STEP_LABELS,
@@ -59,8 +60,10 @@ export default function ImpactRegionsSection({
       />
 
       <div className={sectionStyles.body}>
-        <p className={sectionStyles.sectionTitle}>{SECTION_LABELS.IMPACT_REGIONS_HEADING}</p>
-        <p className={sectionStyles.sectionDescription}>{SECTION_LABELS.IMPACT_REGIONS_DESCRIPTION}</p>
+        <SectionDescription
+          title={SECTION_LABELS.IMPACT_REGIONS_HEADING}
+          description={SECTION_LABELS.IMPACT_REGIONS_DESCRIPTION}
+        />
 
         {/* ── Selected-regions chip display ── */}
         <div className={styles.selectedChipsBar}>
