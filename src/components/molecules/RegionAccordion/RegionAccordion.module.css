@@ -8,10 +8,8 @@
 
 /* ── Region-level accordion ── */
 .accordion {
-  border-bottom: 1px solid var(--color-border-light) !important;
   box-shadow: none !important;
 }
-.accordion:last-child { border-bottom: none !important; }
 .accordion::before { display: none !important; }
 
 .summary {
@@ -38,16 +36,13 @@
 
 .details {
   padding: 0 !important;
-  border-top: 1px solid var(--color-border-light);
 }
 
 /* ── Country-level nested accordion ── */
 .countryAccordion {
   border: none !important;
   box-shadow: none !important;
-  border-bottom: 1px solid var(--color-border-light) !important;
 }
-.countryAccordion:last-child { border-bottom: none !important; }
 
 .countrySummary {
   min-height: 40px !important;
@@ -75,7 +70,6 @@
 .stateDetails {
   padding: 0 !important;
   background: var(--color-surface-alt, #f9fafb);
-  border-top: 1px solid var(--color-border-light);
 }
 
 .stateRow {
@@ -83,10 +77,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px 4px 64px;
-  border-bottom: 1px solid var(--color-border-light);
   min-height: 36px;
 }
-.stateRow:last-child { border-bottom: none; }
 .stateRow:hover { background: rgba(0, 82, 255, 0.05); }
 
 .stateLabel {
@@ -100,10 +92,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px 4px 32px;
-  border-bottom: 1px solid var(--color-border-light);
   min-height: 40px;
 }
-.simpleCountryItem:last-child { border-bottom: none; }
 .simpleCountryItem:hover { background: rgba(0, 82, 255, 0.03); }
 
 /* ── Global row ── */
@@ -112,7 +102,6 @@
   align-items: center;
   padding: 4px 8px 4px 16px;
   min-height: 44px;
-  border-top: 1px solid var(--color-border-light);
   gap: 8px;
 }
 .globalRow:hover { background: rgba(0, 82, 255, 0.03); }
