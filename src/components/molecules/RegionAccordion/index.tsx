@@ -4,14 +4,22 @@ import {
   AccordionSummary,
   AccordionDetails,
   Checkbox,
-  FormControlLabel,
   Typography,
 } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import PublicIcon from '@mui/icons-material/Public';
 import { REGION_LABELS } from '../../../constants/uiLabels';
 import type { Region, Country } from '../../../data/regionData';
 import type { ImpactedLocation } from '../../../types/event.types';
 import styles from './RegionAccordion.module.css';
+
+// ── Expand icon SX (chevron-right rotates 90deg when open) ────────────────────
+const expandSx = {
+  flexDirection: 'row-reverse' as const,
+  '& .MuiAccordionSummary-expandIconWrapper': { transform: 'rotate(0deg)', transition: 'transform 0.2s' },
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': { transform: 'rotate(90deg)' },
+  '& .MuiAccordionSummary-content': { alignItems: 'center', marginLeft: '6px', my: '4px' },
+};
 
 // helpers
 function getCountryLeafCodes(country: Country): string[] {
@@ -52,42 +60,58 @@ function CountryAccordion({ country, regionId, selectedCodes, onChange }: Countr
     return (
       <Accordion disableGutters elevation={0} className={styles.countryAccordion}
         sx={{ '&::before': { display: 'none' } }}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon fontSize="small" />}
+        <AccordionSummary
+          expandIcon={<ChevronRightIcon fontSize="small" className={styles.chevron} />}
           className={styles.countrySummary}
-          sx={{ '& .MuiAccordionSummary-content': { alignItems: 'center', gap: 0.5, my: '4px' } }}>
-          <Checkbox size="small" checked={allChecked} indeterminate={someChecked}
-            onClick={handleCountryToggle} sx={{ p: 0.5 }} />
+          sx={{
+            ...expandSx,
+            '& .MuiAccordionSummary-content': { alignItems: 'center', marginLeft: '4px', my: '3px' },
+          }}
+        >
           <Typography className={styles.countryLabel}>{country.name}</Typography>
           {selectedLeaves.length > 0 && (
             <Typography variant="caption" className={styles.subCount}>
               {selectedLeaves.length} {country.code === 'US' ? 'state(s)' : 'province(s)'}
             </Typography>
           )}
+          <Checkbox
+            size="small"
+            checked={allChecked}
+            indeterminate={someChecked}
+            onClick={handleCountryToggle}
+            sx={{ p: 0.5, ml: 'auto' }}
+          />
         </AccordionSummary>
         <AccordionDetails className={styles.stateDetails}>
-          <div className={styles.stateGrid}>
-            {country.subRegions.map((sr) => {
-              const code = `${country.code}-${sr.code}`;
-              return (
-                <FormControlLabel key={code}
-                  control={<Checkbox size="small" checked={selectedCodes.includes(code)}
-                    onChange={(e) => onChange(regionId, code, e.target.checked)} />}
-                  label={<Typography className={styles.stateLabel}>{sr.name}</Typography>}
-                  className={styles.stateItem} />
-              );
-            })}
-          </div>
+          {country.subRegions.map((sr) => {
+            const code = `${country.code}-${sr.code}`;
+            return (
+              <div key={code} className={styles.stateRow}>
+                <Typography className={styles.stateLabel}>{sr.name}</Typography>
+                <Checkbox
+                  size="small"
+                  checked={selectedCodes.includes(code)}
+                  onChange={(e) => onChange(regionId, code, e.target.checked)}
+                  sx={{ p: 0.5 }}
+                />
+              </div>
+            );
+          })}
         </AccordionDetails>
       </Accordion>
     );
   }
 
   return (
-    <FormControlLabel
-      control={<Checkbox size="small" checked={selectedCodes.includes(country.code)}
-        onChange={(e) => onChange(regionId, country.code, e.target.checked)} />}
-      label={<Typography className={styles.countryLabel}>{country.name}</Typography>}
-      className={styles.simpleCountryItem} />
+    <div className={styles.simpleCountryItem}>
+      <Typography className={styles.countryLabel}>{country.name}</Typography>
+      <Checkbox
+        size="small"
+        checked={selectedCodes.includes(country.code)}
+        onChange={(e) => onChange(regionId, country.code, e.target.checked)}
+        sx={{ p: 0.5 }}
+      />
+    </div>
   );
 }
 
@@ -103,6 +127,23 @@ export default function RegionAccordion({ region, selected, onChange }: RegionAc
   const allSelected = allLeafCodes.every((c) => selectedCodes.includes(c));
   const someSelected = allLeafCodes.some((c) => selectedCodes.includes(c)) && !allSelected;
   const [expanded, setExpanded] = useState(false);
+
+  // ── GLOBAL: simple non-expandable row with globe icon ─────────────────────
+  if (region.isGlobal) {
+    const isChecked = selectedCodes.includes('GLOBAL');
+    return (
+      <div className={styles.globalRow}>
+        <PublicIcon fontSize="small" className={styles.globalIcon} />
+        <Typography className={styles.regionLabel}>{region.label}</Typography>
+        <Checkbox
+          size="small"
+          checked={isChecked}
+          onChange={(e) => onChange(region.id, 'GLOBAL', e.target.checked)}
+          sx={{ p: 0.5, ml: 'auto', mr: 0 }}
+        />
+      </div>
+    );
+  }
 
   const handleRegionToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -120,16 +161,24 @@ export default function RegionAccordion({ region, selected, onChange }: RegionAc
       onChange={(_, isExpanded) => setExpanded(isExpanded)}
       className={styles.accordion}
       sx={{ '&:not(:last-child)': { borderBottom: 0 }, '&::before': { display: 'none' } }}>
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} className={styles.summary}
-        sx={{ '& .MuiAccordionSummary-content': { alignItems: 'center', gap: 1, my: '6px' } }}>
-        <Checkbox size="small" checked={allSelected} indeterminate={someSelected}
-          onClick={handleRegionToggle} sx={{ p: 0.5 }} />
+      <AccordionSummary
+        expandIcon={<ChevronRightIcon className={styles.chevron} />}
+        className={styles.summary}
+        sx={expandSx}
+      >
         <Typography className={styles.regionLabel}>{region.label}</Typography>
         {selectedCodes.length > 0 && (
           <Typography variant="caption" className={styles.selectedCount}>
             {REGION_LABELS.SELECTED_COUNT(selectedCodes.length)}
           </Typography>
         )}
+        <Checkbox
+          size="small"
+          checked={allSelected}
+          indeterminate={someSelected}
+          onClick={handleRegionToggle}
+          sx={{ p: 0.5, ml: 'auto' }}
+        />
       </AccordionSummary>
       <AccordionDetails className={styles.details}>
         {region.countries.map((country) => (
@@ -140,3 +189,5 @@ export default function RegionAccordion({ region, selected, onChange }: RegionAc
     </Accordion>
   );
 }
+
+

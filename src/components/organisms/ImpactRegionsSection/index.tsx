@@ -1,5 +1,4 @@
-import { Chip, Typography } from '@mui/material';
-import clsx from 'clsx';
+import { Typography } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
 import RegionAccordion from '../../molecules/RegionAccordion';
@@ -10,12 +9,13 @@ import {
   REGION_LABELS,
 } from '../../../constants/uiLabels';
 import type { EventFormData, ImpactedLocation } from '../../../types/event.types';
-import { REGIONS, PERILS } from '../../../data/regionData';
+import { REGIONS } from '../../../data/regionData';
 import sectionStyles from '../shared/section.module.css';
 import styles from './ImpactRegionsSection.module.css';
 
 // Resolve a stored code (e.g. "US-CA") to a human-readable label
 function resolveCode(code: string): string {
+  if (code === 'GLOBAL') return 'Global';
   if (code.includes('-')) {
     const [countryCode, srCode] = code.split('-');
     for (const region of REGIONS) {
@@ -37,15 +37,13 @@ function resolveCode(code: string): string {
 interface ImpactRegionsSectionProps {
   data: EventFormData;
   onRegionChange: (regionId: string, countryCode: string, checked: boolean) => void;
-  onPerilToggle: (peril: string) => void;
   isActive: boolean;
 }
 
-/** Organism – Step 2: Impact Regions & Perils */
+/** Organism – Step 2: Impact Regions */
 export default function ImpactRegionsSection({
   data,
   onRegionChange,
-  onPerilToggle,
   isActive,
 }: ImpactRegionsSectionProps) {
   const allSelectedCodes = data.impactedRegions.flatMap((r: ImpactedLocation) => r.countries);
@@ -61,10 +59,13 @@ export default function ImpactRegionsSection({
 
       <div className={sectionStyles.body}>
         <SectionDescription
+          bordered
           title={SECTION_LABELS.IMPACT_REGIONS_HEADING}
           description={SECTION_LABELS.IMPACT_REGIONS_DESCRIPTION}
         />
 
+        {/* ── Content block ── */}
+        <div className={sectionStyles.fieldsBlock}>
         {/* ── Selected-regions chip display ── */}
         <div className={styles.selectedChipsBar}>
           <Typography variant="caption" className={styles.chipsBarLabel}>
@@ -106,31 +107,12 @@ export default function ImpactRegionsSection({
               />
             ))}
           </div>
-        </div>
-
-        {/* Perils */}
-        <div>
-          <Typography variant="body2" className={styles.perilsLabel}>
-            {FIELD_LABELS.PERILS}
+          <Typography variant="caption" className={styles.accordionHelper}>
+            {REGION_LABELS.ACCORDION_HELPER}
           </Typography>
-          <div className={styles.perilsGrid}>
-            {PERILS.map((peril) => {
-              const selected = data.perils.includes(peril);
-              return (
-                <Chip
-                  key={peril}
-                  label={peril}
-                  onClick={() => onPerilToggle(peril)}
-                  variant={selected ? 'filled' : 'outlined'}
-                  className={clsx({
-                    [styles['perilChip--selected']]: selected,
-                    [styles['perilChip--unselected']]: !selected,
-                  })}
-                />
-              );
-            })}
-          </div>
         </div>
+        </div>{/* end fieldsBlock */}
+
       </div>
     </section>
   );

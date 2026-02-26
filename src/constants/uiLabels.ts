@@ -179,6 +179,7 @@ export const REGION_LABELS = {
   STATES_SELECTED: (n: number) => `${n} state${n !== 1 ? 's' : ''}`,
   PROVINCES_SELECTED: (n: number) => `${n} province${n !== 1 ? 's' : ''}`,
   IMPACTED_REGIONS_CHIPS: 'Selected Regions',
+  ACCORDION_HELPER: 'Select specific locations from the RDM hierarchy. Expand zones and subregions to view individual countries/states.',
 } as const;
 
 // ── External Sources (Step 3) ─────────────────────────────────────────────────

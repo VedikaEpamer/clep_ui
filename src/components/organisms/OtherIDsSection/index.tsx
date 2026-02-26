@@ -59,10 +59,12 @@ export default function OtherIDsSection({
 
       <div className={sectionStyles.body}>
         <SectionDescription
+          bordered
           title={SECTION_LABELS.OTHER_IDS_HEADING}
           description={SECTION_LABELS.OTHER_IDS_DESCRIPTION}
         />
 
+        <div className={sectionStyles.fieldsBlock}>
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
             <FormField label={FIELD_LABELS.BROKER_EVENT_ID}>
@@ -101,6 +103,7 @@ export default function OtherIDsSection({
             </FormField>
           </Grid>
         </Grid>
+        </div>{/* end fieldsBlock */}
 
         {/* ── External Sources ── */}
         <hr className={styles.divider} />

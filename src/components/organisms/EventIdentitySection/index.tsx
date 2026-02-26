@@ -22,7 +22,6 @@ import {
   BUSINESS_GROUPS,
 } from '../../../data/regionData';
 import sectionStyles from '../shared/section.module.css';
-import styles from './EventIdentitySection.module.css';
 
 interface EventIdentitySectionProps {
   data: EventFormData;
@@ -57,7 +56,7 @@ export default function EventIdentitySection({
         />
 
         {/* ── Block 2: fields ── */}
-        <div className={styles.fieldsBlock}>
+        <div className={sectionStyles.fieldsBlock}>
           <Grid container spacing={2.5}>
             {/* Row 1: Status + ID */}
             <Grid size={{ xs: 12, md: 6 }}>

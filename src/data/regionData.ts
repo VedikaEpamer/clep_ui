@@ -13,6 +13,7 @@ export interface Region {
   id: string;
   label: string;
   countries: Country[];
+  isGlobal?: boolean;
 }
 
 export const REGIONS: Region[] = [
@@ -113,6 +114,12 @@ export const REGIONS: Region[] = [
       { code: 'SG', name: 'Singapore' },
       { code: 'KR', name: 'South Korea' },
     ],
+  },
+  {
+    id: 'global',
+    label: 'GLOBAL',
+    isGlobal: true,
+    countries: [{ code: 'GLOBAL', name: 'Global' }],
   },
 ];
 

@@ -16,7 +16,6 @@ import {
 import {
   updateField,
   toggleRegion,
-  togglePeril,
   setBusinessGroups,
   nextStep,
   prevStep,
@@ -49,13 +48,6 @@ export default function CreateEventPage() {
   const handleRegionChange = useCallback(
     (regionId: string, countryCode: string, checked: boolean) => {
       dispatch(toggleRegion({ regionId, countryCode, checked }));
-    },
-    [dispatch]
-  );
-
-  const handlePerilToggle = useCallback(
-    (peril: string) => {
-      dispatch(togglePeril(peril));
     },
     [dispatch]
   );
@@ -156,7 +148,6 @@ export default function CreateEventPage() {
         <ImpactRegionsSection
           data={formData}
           onRegionChange={handleRegionChange}
-          onPerilToggle={handlePerilToggle}
           isActive={currentStep === 2}
         />
       </div>

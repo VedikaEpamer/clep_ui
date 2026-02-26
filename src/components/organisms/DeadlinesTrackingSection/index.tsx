@@ -37,10 +37,12 @@ export default function DeadlinesTrackingSection({
 
       <div className={sectionStyles.body}>
         <SectionDescription
+          bordered
           title={SECTION_LABELS.DEADLINES_HEADING}
           description={SECTION_LABELS.DEADLINES_DESCRIPTION}
         />
 
+        <div className={sectionStyles.fieldsBlock}>
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
             <FormField label={FIELD_LABELS.LOSS_PICK_DEADLINE}>
@@ -92,6 +94,7 @@ export default function DeadlinesTrackingSection({
             </FormField>
           </Grid>
         </Grid>
+        </div>{/* end fieldsBlock */}
       </div>
     </section>
   );
