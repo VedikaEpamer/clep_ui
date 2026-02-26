@@ -3,15 +3,20 @@ import {
   OutlinedInput,
   FormHelperText,
   FormControl,
+  MenuItem,
   type SelectProps,
   type SelectChangeEvent,
 } from '@mui/material';
 import type { ReactNode } from 'react';
 
 export interface AppSelectProps
-  extends Omit<SelectProps<string | string[]>, 'onChange' | 'input' | 'variant'> {
-  /** Simplified onChange – returns the string value (single) or string[] (multiple) */
-  onChange?: (value: string | string[]) => void;
+  extends Omit<SelectProps<string>, 'onChange' | 'input' | 'variant' | 'children'> {
+  /** Options rendered as MenuItems inside the select */
+  options: string[];
+  /** Placeholder text shown when no value is selected */
+  placeholder?: string;
+  /** Simplified onChange – returns the selected string value */
+  onChange?: (value: string) => void;
   /** Helper / error text rendered below the select */
   helperText?: ReactNode;
   /** Stretch to fill the parent width (default: true) */
@@ -21,22 +26,24 @@ export interface AppSelectProps
 /**
  * Atom – project-level select input built on MUI Select + OutlinedInput.
  *   • outline variant, small size by default
- *   • displayEmpty = true so placeholder MenuItems are always visible
+ *   • displayEmpty = true so placeholder is always visible
+ *   • options rendered internally – no need to pass MenuItem children
  *   • simplified onChange(value: string) callback
  *   • fullWidth defaults to true
  *   • helperText support
  */
 export default function AppSelect({
+  options,
+  placeholder,
   onChange,
   helperText,
   fullWidth = true,
   size = 'small',
-  children,
   disabled,
   sx,
   ...rest
 }: AppSelectProps) {
-  const handleChange = (e: SelectChangeEvent<string | string[]>) => {
+  const handleChange = (e: SelectChangeEvent<string>) => {
     onChange?.(e.target.value);
   };
 
@@ -48,7 +55,12 @@ export default function AppSelect({
         onChange={handleChange}
         {...rest}
       >
-        {children}
+        {placeholder && (
+          <MenuItem value=""><em>{placeholder}</em></MenuItem>
+        )}
+        {options.map((opt) => (
+          <MenuItem key={opt} value={opt}>{opt}</MenuItem>
+        ))}
       </Select>
       {helperText && (
         <FormHelperText sx={{ marginLeft: 0 }}>{helperText}</FormHelperText>

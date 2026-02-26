@@ -1,7 +1,9 @@
-import { Grid, MenuItem } from '@mui/material';
+import { Grid } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
 import FormField from '../../molecules/FormField';
+import AppTextField from '../../atoms/AppTextField';
+import AppSelect from '../../atoms/AppSelect';
 import {
   STEP_LABELS,
   SECTION_LABELS,
@@ -41,56 +43,53 @@ export default function DeadlinesTrackingSection({
 
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.LOSS_PICK_DEADLINE}
-              type="date"
-              value={data.lossPickDeadline}
-              onChange={(v) => onChange('lossPickDeadline', v)}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.FINAL_SUBMISSION_DEADLINE}
-              type="date"
-              value={data.finalSubmissionDeadline}
-              onChange={(v) => onChange('finalSubmissionDeadline', v)}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.ASSIGNED_ANALYST}
-              select
-              value={data.assignedAnalyst}
-              onChange={(v) => onChange('assignedAnalyst', v)}
-            >
-              <MenuItem value=""><em>{SELECT_DEFAULTS.ANALYST}</em></MenuItem>
-              {ANALYSTS.map((a) => (
-                <MenuItem key={a} value={a}>{a}</MenuItem>
-              ))}
+            <FormField label={FIELD_LABELS.LOSS_PICK_DEADLINE}>
+              <AppTextField
+                type="date"
+                value={data.lossPickDeadline}
+                onChange={(v) => onChange('lossPickDeadline', v)}
+              />
             </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.REVIEWER_NAME}
-              select
-              value={data.reviewerName}
-              onChange={(v) => onChange('reviewerName', v)}
-            >
-              <MenuItem value=""><em>{SELECT_DEFAULTS.REVIEWER}</em></MenuItem>
-              {ANALYSTS.map((a) => (
-                <MenuItem key={a} value={a}>{a}</MenuItem>
-              ))}
+            <FormField label={FIELD_LABELS.FINAL_SUBMISSION_DEADLINE}>
+              <AppTextField
+                type="date"
+                value={data.finalSubmissionDeadline}
+                onChange={(v) => onChange('finalSubmissionDeadline', v)}
+              />
+            </FormField>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <FormField label={FIELD_LABELS.ASSIGNED_ANALYST}>
+              <AppSelect
+                options={ANALYSTS}
+                placeholder={SELECT_DEFAULTS.ANALYST}
+                value={data.assignedAnalyst}
+                onChange={(v) => onChange('assignedAnalyst', v)}
+              />
+            </FormField>
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <FormField label={FIELD_LABELS.REVIEWER_NAME}>
+              <AppSelect
+                options={ANALYSTS}
+                placeholder={SELECT_DEFAULTS.REVIEWER}
+                value={data.reviewerName}
+                onChange={(v) => onChange('reviewerName', v)}
+              />
             </FormField>
           </Grid>
           <Grid size={{ xs: 12 }}>
-            <FormField
-              label={FIELD_LABELS.NOTES}
-              multiline
-              rows={3}
-              placeholder={PLACEHOLDERS.NOTES}
-              value={data.notes}
-              onChange={(v) => onChange('notes', v)}
-            />
+            <FormField label={FIELD_LABELS.NOTES}>
+              <AppTextField
+                multiline
+                rows={3}
+                placeholder={PLACEHOLDERS.NOTES}
+                value={data.notes}
+                onChange={(v) => onChange('notes', v)}
+              />
+            </FormField>
           </Grid>
         </Grid>
       </div>

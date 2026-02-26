@@ -4,17 +4,3 @@
   padding: 20px;
   background-color: var(--color-white);
 }
-
-/* Label + input wrapper matching FormField molecule style */
-.fieldWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.fieldLabel {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  line-height: 1.4;
-}

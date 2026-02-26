@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
 import FormField from '../../molecules/FormField';
+import AppTextField from '../../atoms/AppTextField';
 import {
   STEP_LABELS,
   SECTION_LABELS,
@@ -62,39 +63,42 @@ export default function OtherIDsSection({
           description={SECTION_LABELS.OTHER_IDS_DESCRIPTION}
         />
 
-        {/* ── Core reference IDs ── */}
         <Grid container spacing={2.5}>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.BROKER_EVENT_ID}
-              placeholder={PLACEHOLDERS.BROKER_EVENT_ID}
-              value={data.brokerEventId}
-              onChange={(v) => onChange('brokerEventId', v)}
-            />
+            <FormField label={FIELD_LABELS.BROKER_EVENT_ID}>
+              <AppTextField
+                placeholder={PLACEHOLDERS.BROKER_EVENT_ID}
+                value={data.brokerEventId}
+                onChange={(v) => onChange('brokerEventId', v)}
+              />
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.MARKET_EVENT_ID}
-              placeholder={PLACEHOLDERS.MARKET_EVENT_ID}
-              value={data.marketEventId}
-              onChange={(v) => onChange('marketEventId', v)}
-            />
+            <FormField label={FIELD_LABELS.MARKET_EVENT_ID}>
+              <AppTextField
+                placeholder={PLACEHOLDERS.MARKET_EVENT_ID}
+                value={data.marketEventId}
+                onChange={(v) => onChange('marketEventId', v)}
+              />
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.CLIENT_EVENT_ID}
-              placeholder={PLACEHOLDERS.CLIENT_EVENT_ID}
-              value={data.clientEventId}
-              onChange={(v) => onChange('clientEventId', v)}
-            />
+            <FormField label={FIELD_LABELS.CLIENT_EVENT_ID}>
+              <AppTextField
+                placeholder={PLACEHOLDERS.CLIENT_EVENT_ID}
+                value={data.clientEventId}
+                onChange={(v) => onChange('clientEventId', v)}
+              />
+            </FormField>
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
-            <FormField
-              label={FIELD_LABELS.EXTERNAL_REFERENCE}
-              placeholder={PLACEHOLDERS.EXTERNAL_REFERENCE}
-              value={data.externalReference}
-              onChange={(v) => onChange('externalReference', v)}
-            />
+            <FormField label={FIELD_LABELS.EXTERNAL_REFERENCE}>
+              <AppTextField
+                placeholder={PLACEHOLDERS.EXTERNAL_REFERENCE}
+                value={data.externalReference}
+                onChange={(v) => onChange('externalReference', v)}
+              />
+            </FormField>
           </Grid>
         </Grid>
 

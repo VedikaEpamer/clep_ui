@@ -1,7 +1,9 @@
-import { Grid, MenuItem } from '@mui/material';
+import { Grid } from '@mui/material';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
 import FormField from '../../molecules/FormField';
+import AppTextField from '../../atoms/AppTextField';
+import AppSelect from '../../atoms/AppSelect';
 import AppMultiSelect from '../../atoms/AppMultiSelect';
 import {
   STEP_LABELS,
@@ -59,160 +61,153 @@ export default function EventIdentitySection({
           <Grid container spacing={2.5}>
             {/* Row 1: Status + ID */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_STATUS}
-                value={data.eventStatus}
-                readOnly
-                helperText={HELPER_TEXTS.EVENT_STATUS}
-              />
+              <FormField label={FIELD_LABELS.EVENT_STATUS}>
+                <AppTextField
+                  value={data.eventStatus}
+                  readOnly
+                  helperText={HELPER_TEXTS.EVENT_STATUS}
+                />
+              </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_ID}
-                value={data.eventId}
-                readOnly
-              />
+              <FormField label={FIELD_LABELS.EVENT_ID}>
+                <AppTextField value={data.eventId} readOnly />
+              </FormField>
             </Grid>
 
             {/* Row 2: CAT Code + CAT Premium */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.CAT_CODE}
-                placeholder={PLACEHOLDERS.CAT_CODE}
-                value={data.catCode}
-                onChange={(v) => onChange('catCode', v)}
-              />
+              <FormField label={FIELD_LABELS.CAT_CODE}>
+                <AppTextField
+                  placeholder={PLACEHOLDERS.CAT_CODE}
+                  value={data.catCode}
+                  onChange={(v) => onChange('catCode', v)}
+                />
+              </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.CAT_PREMIUM_ALLOCATION}
-                select
-                value={data.catPremiumAllocation}
-                onChange={(v) => onChange('catPremiumAllocation', v)}
-              >
-                <MenuItem value=""><em>{SELECT_DEFAULTS.PREMIUM_STATUS}</em></MenuItem>
-                {CAT_PREMIUM_OPTIONS.map((opt) => (
-                  <MenuItem key={opt} value={opt}>{opt}</MenuItem>
-                ))}
+              <FormField label={FIELD_LABELS.CAT_PREMIUM_ALLOCATION}>
+                <AppSelect
+                  options={CAT_PREMIUM_OPTIONS}
+                  placeholder={SELECT_DEFAULTS.PREMIUM_STATUS}
+                  value={data.catPremiumAllocation}
+                  onChange={(v) => onChange('catPremiumAllocation', v)}
+                />
               </FormField>
             </Grid>
 
             {/* Row 3: Event Name */}
             <Grid size={{ xs: 12 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_NAME}
-                placeholder={PLACEHOLDERS.EVENT_NAME}
-                value={data.eventName}
-                onChange={(v) => onChange('eventName', v)}
-              />
+              <FormField label={FIELD_LABELS.EVENT_NAME}>
+                <AppTextField
+                  placeholder={PLACEHOLDERS.EVENT_NAME}
+                  value={data.eventName}
+                  onChange={(v) => onChange('eventName', v)}
+                />
+              </FormField>
             </Grid>
 
             {/* Row 4: Event Type + Sub-Type */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_TYPE}
-                select
-                value={data.eventType}
-                onChange={(v) => {
-                  onChange('eventType', v);
-                  onChange('eventSubType', '');
-                }}
-              >
-                <MenuItem value=""><em>{SELECT_DEFAULTS.EVENT_TYPE}</em></MenuItem>
-                {EVENT_TYPES.map((t) => (
-                  <MenuItem key={t} value={t}>{t}</MenuItem>
-                ))}
+              <FormField label={FIELD_LABELS.EVENT_TYPE}>
+                <AppSelect
+                  options={EVENT_TYPES}
+                  placeholder={SELECT_DEFAULTS.EVENT_TYPE}
+                  value={data.eventType}
+                  onChange={(v) => {
+                    onChange('eventType', v);
+                    onChange('eventSubType', '');
+                  }}
+                />
               </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_SUB_TYPE}
-                select
-                value={data.eventSubType}
-                onChange={(v) => onChange('eventSubType', v)}
-                disabled={!data.eventType}
-              >
-                <MenuItem value=""><em>{SELECT_DEFAULTS.SUB_TYPE}</em></MenuItem>
-                {subTypes.map((st) => (
-                  <MenuItem key={st} value={st}>{st}</MenuItem>
-                ))}
+              <FormField label={FIELD_LABELS.EVENT_SUB_TYPE}>
+                <AppSelect
+                  options={subTypes}
+                  placeholder={SELECT_DEFAULTS.SUB_TYPE}
+                  value={data.eventSubType}
+                  onChange={(v) => onChange('eventSubType', v)}
+                  disabled={!data.eventType}
+                />
               </FormField>
             </Grid>
 
             {/* Row 5: Primary Peril + Business Groups */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.PRIMARY_PERIL}
-                select
-                value={data.primaryPeril}
-                onChange={(v) => onChange('primaryPeril', v)}
-              >
-                <MenuItem value=""><em>{SELECT_DEFAULTS.PERIL}</em></MenuItem>
-                {PERILS.map((p) => (
-                  <MenuItem key={p} value={p}>{p}</MenuItem>
-                ))}
+              <FormField label={FIELD_LABELS.PRIMARY_PERIL}>
+                <AppSelect
+                  options={PERILS}
+                  placeholder={SELECT_DEFAULTS.PERIL}
+                  value={data.primaryPeril}
+                  onChange={(v) => onChange('primaryPeril', v)}
+                />
               </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <div className={styles.fieldWrapper}>
-                <label className={styles.fieldLabel}>{FIELD_LABELS.BUSINESS_GROUPS}</label>
+              <FormField label={FIELD_LABELS.BUSINESS_GROUPS}>
                 <AppMultiSelect
                   options={BUSINESS_GROUPS}
                   value={data.businessGroups}
                   onChange={onBusinessGroupsChange}
                   placeholder={SELECT_DEFAULTS.BUSINESS_GROUPS}
                 />
-              </div>
+              </FormField>
             </Grid>
 
-            {/* Row 6: Event Date (Loss Occurrence) + Loss Start Date */}
+            {/* Row 6: Event Date + Loss Start Date */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.EVENT_DATE}
-                type="date"
-                value={data.eventDate}
-                onChange={(v) => onChange('eventDate', v)}
-              />
+              <FormField label={FIELD_LABELS.EVENT_DATE}>
+                <AppTextField
+                  type="date"
+                  value={data.eventDate}
+                  onChange={(v) => onChange('eventDate', v)}
+                />
+              </FormField>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.LOSS_START_DATE}
-                type="date"
-                value={data.lossStartDate}
-                onChange={(v) => onChange('lossStartDate', v)}
-              />
+              <FormField label={FIELD_LABELS.LOSS_START_DATE}>
+                <AppTextField
+                  type="date"
+                  value={data.lossStartDate}
+                  onChange={(v) => onChange('lossStartDate', v)}
+                />
+              </FormField>
             </Grid>
 
             {/* Row 7: Loss End Date */}
             <Grid size={{ xs: 12, md: 6 }}>
-              <FormField
-                label={FIELD_LABELS.LOSS_END_DATE}
-                type="date"
-                value={data.lossEndDate}
-                onChange={(v) => onChange('lossEndDate', v)}
-              />
+              <FormField label={FIELD_LABELS.LOSS_END_DATE}>
+                <AppTextField
+                  type="date"
+                  value={data.lossEndDate}
+                  onChange={(v) => onChange('lossEndDate', v)}
+                />
+              </FormField>
             </Grid>
 
             {/* Row 8: Short Description */}
             <Grid size={{ xs: 12 }}>
-              <FormField
-                label={FIELD_LABELS.SHORT_DESCRIPTION}
-                placeholder={PLACEHOLDERS.SHORT_DESCRIPTION}
-                value={data.shortDescription}
-                onChange={(v) => onChange('shortDescription', v)}
-              />
+              <FormField label={FIELD_LABELS.SHORT_DESCRIPTION}>
+                <AppTextField
+                  placeholder={PLACEHOLDERS.SHORT_DESCRIPTION}
+                  value={data.shortDescription}
+                  onChange={(v) => onChange('shortDescription', v)}
+                />
+              </FormField>
             </Grid>
 
             {/* Row 9: Long Description */}
             <Grid size={{ xs: 12 }}>
-              <FormField
-                label={FIELD_LABELS.LONG_DESCRIPTION}
-                multiline
-                rows={3}
-                placeholder={PLACEHOLDERS.LONG_DESCRIPTION}
-                value={data.longDescription}
-                onChange={(v) => onChange('longDescription', v)}
-              />
+              <FormField label={FIELD_LABELS.LONG_DESCRIPTION}>
+                <AppTextField
+                  multiline
+                  rows={3}
+                  placeholder={PLACEHOLDERS.LONG_DESCRIPTION}
+                  value={data.longDescription}
+                  onChange={(v) => onChange('longDescription', v)}
+                />
+              </FormField>
             </Grid>
           </Grid>
         </div>

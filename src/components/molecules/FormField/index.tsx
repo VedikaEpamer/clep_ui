@@ -1,55 +1,34 @@
 import type { ReactNode } from 'react';
-import AppTextField, { type AppTextFieldProps } from '../../atoms/AppTextField';
-import AppSelect, { type AppSelectProps } from '../../atoms/AppSelect';
 import styles from './FormField.module.css';
 
-// ── Select variant ───────────────────────────────────────────────────────────
-interface FormSelectProps extends Omit<AppSelectProps, 'onChange'> {
+interface FormFieldProps {
+  /** Static label rendered above the input */
   label: string;
-  select: true;
-  children?: ReactNode;
-  /** Single-value onChange – FormField selects always return a plain string */
-  onChange?: (value: string) => void;
+  /** The input atom (AppTextField, AppSelect, AppMultiSelect, etc.) */
+  children: ReactNode;
 }
-
-// ── Plain input variant ──────────────────────────────────────────────────────
-interface FormInputProps extends AppTextFieldProps {
-  label: string;
-  select?: false;
-  children?: never;
-}
-
-type FormFieldProps = FormSelectProps | FormInputProps;
 
 /**
- * Molecule – stacks a static label above either an AppSelect or AppTextField.
+ * Molecule – stacks a static label above any input atom.
  *
- * Usage (plain input):
- *   <FormField label="Event Name" value={...} onChange={...} placeholder="..." />
- *
- * Usage (select):
- *   <FormField label="Event Type" select value={...} onChange={...}>
- *     <MenuItem value="">...</MenuItem>
+ * Usage:
+ *   <FormField label="Event Name">
+ *     <AppTextField value={...} onChange={...} />
  *   </FormField>
  *
- * Usage (read-only):
- *   <FormField label="Event Status" value={...} readOnly helperText="..." />
+ *   <FormField label="Event Type">
+ *     <AppSelect options={EVENT_TYPES} placeholder="Select type" value={...} onChange={...} />
+ *   </FormField>
  *
- * Usage (date):
- *   <FormField label="Event Date" type="date" value={...} onChange={...} />
- *
- * Usage (multiline):
- *   <FormField label="Notes" multiline rows={3} value={...} onChange={...} />
+ *   <FormField label="Business Groups">
+ *     <AppMultiSelect options={...} value={...} onChange={...} />
+ *   </FormField>
  */
-export default function FormField({ label, children, select, ...rest }: FormFieldProps) {
+export default function FormField({ label, children }: FormFieldProps) {
   return (
     <div className={styles.root}>
       <label className={styles.label}>{label}</label>
-      {select ? (
-        <AppSelect {...(rest as AppSelectProps)}>{children}</AppSelect>
-      ) : (
-        <AppTextField {...(rest as AppTextFieldProps)} />
-      )}
+      {children}
     </div>
   );
 }
