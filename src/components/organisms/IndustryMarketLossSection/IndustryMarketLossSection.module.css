@@ -1,0 +1,128 @@
+/* IndustryMarketLossSection */
+
+/* ── Three-column estimate grid ── */
+.estimatesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ── Field label (above input) ── */
+.fieldLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ── Estimate Source row ── */
+.fullRow {
+  margin-bottom: 16px;
+}
+
+/* ── Severity Level ── */
+.severityGroup {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: calc(var(--spacing, 8px) * 3);
+  padding: 0.25rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.severityBtn {
+  flex: 1;
+  padding: 10px 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  white-space: nowrap;
+  outline: none;
+  display: block;
+}
+
+.severityBtn:last-child {
+  border-right: 1px solid var(--color-border);
+}
+
+.severityBtn:hover:not(.severityBtnActive) {
+  background: var(--color-chip-hover-bg);
+}
+
+.severityBtnActive {
+  font-weight: 400;
+}
+
+.severityBtnActive.severityMinor {
+  color: oklch(0.527 0.154 150.069);
+  border: 1px solid oklch(0.527 0.154 150.069);
+  background-color: oklch(0.962 0.044 156.743);
+}
+.severityBtnActive.severityModerate {
+  background-color: oklch(0.973 0.071 103.193);
+  color: oklch(0.55 0.14 66.44 / 1);
+  border: 1px solid oklch(0.55 0.14 66.44 / 1);
+}
+.severityBtnActive.severityMajor {
+  color: oklch(0.553 0.195 38.402);
+  border: 1px solid oklch(0.553 0.195 38.402);
+  background-color: oklch(0.954 0.038 75.164);
+}
+.severityBtnActive.severitySevere {
+  color: oklch(0.505 0.213 27.518);
+  border: 1px solid oklch(0.505 0.213 27.518);
+  background-color: oklch(0.936 0.032 17.717);
+}
+.severityBtnActive.severityCatastrophic {
+  color: oklch(0.496 0.265 301.924);
+  border: 1px solid oklch(0.496 0.265 301.924);
+  background-color: oklch(0.946 0.033 307.174);
+}
+
+/* ── Comments textarea ── */
+.commentsRow {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* ── Info box (amber) ── */
+.infoBox {
+  background: #fffde7;
+  border: 1px solid #f9e04b;
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-top: 8px;
+}
+
+.infoTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 6px 0;
+}
+
+.infoText {
+  font-size: 0.83rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.infoText strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}

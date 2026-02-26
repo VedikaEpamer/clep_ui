@@ -58,6 +58,14 @@ export const SECTION_LABELS = {
   INDUSTRY_LOSS_DESCRIPTION:
     'Provide industry market loss estimates and sources for benchmark and validation purposes.',
 
+  // Step 4 – Market Loss (new design)
+  MARKET_LOSS_HEADING: 'Market Loss Estimates',
+  MARKET_LOSS_DESCRIPTION:
+    'Capture high-level industry loss estimates for the event, typically used during the first 72 hours of an event.',
+  MARKET_LOSS_INFO_TITLE: 'About Market Loss Estimates',
+  MARKET_LOSS_INFO_DESCRIPTION:
+    'These fields provide context for leadership and are referenced in UW estimation comparisons, but do not directly control contract-level calculations in Phase 1.',
+
   // Step 5
   DEADLINES_HEADING: 'Workflow Deadlines & Assignment',
   DEADLINES_DESCRIPTION:
@@ -102,6 +110,12 @@ export const FIELD_LABELS = {
   INDUSTRY_LOSS_SOURCE: 'Industry Loss Source *',
   INDUSTRY_LOSS_DATE: 'Industry Loss Date *',
   MARKET_SHARE: 'Market Share (%)',
+  LOW_ESTIMATE: 'Low Estimate ($ millions)',
+  MEDIUM_ESTIMATE: 'Medium Estimate ($ millions)',
+  HIGH_ESTIMATE: 'High Estimate ($ millions)',
+  ESTIMATE_SOURCE: 'Estimate Source',
+  SEVERITY_LEVEL: 'Severity Level',
+  MARKET_LOSS_COMMENTS: 'Comments & Caveats',
 
   // Step 5
   LOSS_PICK_DEADLINE: 'Loss Pick Deadline *',
@@ -123,6 +137,8 @@ export const PLACEHOLDERS = {
   EXTERNAL_REFERENCE: 'Any additional reference',
   INDUSTRY_LOSS_ESTIMATE: 'e.g., 5,000,000,000',
   MARKET_SHARE_PCT: 'e.g., 2.5',
+  ESTIMATE_VALUE: 'e.g., 12',
+  MARKET_LOSS_COMMENTS: 'Enter any notes, caveats, or additional context about the market loss estimates',
   NOTES: 'Any additional notes or tracking information...',
 } as const;
 

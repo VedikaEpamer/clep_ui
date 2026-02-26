@@ -41,6 +41,13 @@ export interface EventFormData {
   externalSources: ExternalSource[];
 
   // Step 4 – Industry Market Loss
+  lowEstimate: string;
+  mediumEstimate: string;
+  highEstimate: string;
+  estimateSource: string;
+  severityLevel: string;
+  marketLossComments: string;
+  // legacy (kept for backward compat)
   industrylossEstimate: string;
   industryLossSource: string;
   industryLossDate: string;
@@ -76,6 +83,12 @@ export const initialFormData: EventFormData = {
   clientEventId: '',
   externalReference: '',
   externalSources: [],
+  lowEstimate: '',
+  mediumEstimate: '',
+  highEstimate: '',
+  estimateSource: '',
+  severityLevel: '',
+  marketLossComments: '',
   industrylossEstimate: '',
   industryLossSource: '',
   industryLossDate: '',

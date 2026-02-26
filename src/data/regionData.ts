@@ -195,6 +195,14 @@ export const EXTERNAL_SOURCE_TYPES = [
   'Other',
 ];
 
+export const SEVERITY_LEVELS = [
+  'Minor',
+  'Moderate',
+  'Major',
+  'Severe',
+  'Catastrophic',
+];
+
 export const ANALYSTS = [
   'John Smith',
   'Sarah Johnson',
