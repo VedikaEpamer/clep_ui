@@ -1,19 +1,24 @@
 import { useState } from 'react';
-import { TextField, MenuItem, Typography, Button } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { TextField, MenuItem, IconButton, Typography } from '@mui/material';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import SectionHeader from '../../molecules/SectionHeader';
 import SectionDescription from '../../molecules/SectionDescription';
 import {
   STEP_LABELS,
   SECTION_LABELS,
   EXTERNAL_SOURCE_LABELS,
-  SELECT_DEFAULTS,
-  BUTTON_LABELS,
 } from '../../../constants/uiLabels';
 import type { EventFormData, ExternalSource } from '../../../types/event.types';
 import { EXTERNAL_SOURCE_TYPES } from '../../../data/regionData';
 import sectionStyles from '../shared/section.module.css';
 import styles from './OtherIDsSection.module.css';
+
+interface Row {
+  localId: string;
+  reduxId: string | null; // null = not yet synced to Redux
+  sourceType: string;
+  sourceId: string;
+}
 
 interface OtherIDsSectionProps {
   data: EventFormData;
@@ -29,19 +34,60 @@ export default function OtherIDsSection({
   onRemoveSource,
   isActive,
 }: OtherIDsSectionProps) {
-  const [sourceType, setSourceType] = useState('');
-  const [sourceId, setSourceId] = useState('');
+  const [rows, setRows] = useState<Row[]>(() =>
+    // Initialise from Redux store (e.g. on re-mount)
+    data.externalSources.map((s) => ({
+      localId: s.id,
+      reduxId: s.id,
+      sourceType: s.sourceType,
+      sourceId: s.sourceId,
+    }))
+  );
 
-  const handleAdd = () => {
-    if (!sourceType.trim() || !sourceId.trim()) return;
-    onAddSource({
-      id: `src-${Date.now()}`,
-      sourceType: sourceType.trim(),
-      sourceId: sourceId.trim(),
-    });
-    setSourceType('');
-    setSourceId('');
+  const handleAddRow = () => {
+    setRows((prev) => [
+      ...prev,
+      { localId: `local-${Date.now()}`, reduxId: null, sourceType: '', sourceId: '' },
+    ]);
   };
+
+  const handleRowChange = (localId: string, field: 'sourceType' | 'sourceId', value: string) => {
+    setRows((prev) =>
+      prev.map((row) => {
+        if (row.localId !== localId) return row;
+
+        const next = { ...row, [field]: value };
+        const filled = next.sourceType.trim() !== '' && next.sourceId.trim() !== '';
+
+        if (filled) {
+          if (row.reduxId) {
+            // Already committed — remove old entry, add updated one
+            onRemoveSource(row.reduxId);
+          }
+          const newReduxId = `src-${Date.now()}`;
+          onAddSource({ id: newReduxId, sourceType: next.sourceType.trim(), sourceId: next.sourceId.trim() });
+          return { ...next, reduxId: newReduxId };
+        }
+
+        // If previously committed but now incomplete, remove from Redux
+        if (row.reduxId) {
+          onRemoveSource(row.reduxId);
+          return { ...next, reduxId: null };
+        }
+
+        return next;
+      })
+    );
+  };
+
+  const handleRemoveRow = (localId: string) => {
+    const row = rows.find((r) => r.localId === localId);
+    if (row?.reduxId) onRemoveSource(row.reduxId);
+    setRows((prev) => prev.filter((r) => r.localId !== localId));
+  };
+
+  const committedRows = rows.filter((r) => r.reduxId !== null);
+  const isEmpty = rows.length === 0;
 
   return (
     <section className={sectionStyles.card}>
@@ -59,83 +105,87 @@ export default function OtherIDsSection({
         />
 
         <div className={sectionStyles.fieldsBlock}>
-        {/* ── External Sources ── */}
-        <SectionDescription
-          size="sm"
-          title={SECTION_LABELS.EXTERNAL_SOURCES_HEADING}
-          description={SECTION_LABELS.EXTERNAL_SOURCES_DESCRIPTION}
-        />
 
-        {/* Add row */}
-        <div className={styles.addRow}>
-          <TextField
-            select
-            size="small"
-            label={EXTERNAL_SOURCE_LABELS.SOURCE_TYPE}
-            value={sourceType}
-            onChange={(e) => setSourceType(e.target.value)}
-          >
-            <MenuItem value=""><em>{SELECT_DEFAULTS.SOURCE_TYPE}</em></MenuItem>
-            {EXTERNAL_SOURCE_TYPES.map((t) => (
-              <MenuItem key={t} value={t}>{t}</MenuItem>
-            ))}
-          </TextField>
+          {/* ── Editable rows ── */}
+          {rows.length > 0 && (
+            <div className={styles.rowsContainer}>
+              {rows.map((row) => (
+                <div key={row.localId} className={styles.entryRow}>
+                  <div>
+                    <span className={styles.rowHeaderLabel}>{EXTERNAL_SOURCE_LABELS.EXTERNAL_SOURCE_LABEL}</span>
+                    <TextField
+                      select
+                      size="small"
+                      value={row.sourceType}
+                      onChange={(e) => handleRowChange(row.localId, 'sourceType', e.target.value)}
+                      className={styles.sourceSelect}
+                      SelectProps={{ displayEmpty: true }}
+                      inputProps={{ 'aria-label': EXTERNAL_SOURCE_LABELS.EXTERNAL_SOURCE_LABEL }}
+                    >
+                      <MenuItem value="">
+                        <em className={styles.placeholder}>{EXTERNAL_SOURCE_LABELS.SELECT_SOURCE_PLACEHOLDER}</em>
+                      </MenuItem>
+                      {EXTERNAL_SOURCE_TYPES.map((t) => (
+                        <MenuItem key={t} value={t}>{t}</MenuItem>
+                      ))}
+                    </TextField>
+                  </div>
 
-          <TextField
-            size="small"
-            label={EXTERNAL_SOURCE_LABELS.SOURCE_ID}
-            placeholder={EXTERNAL_SOURCE_LABELS.PLACEHOLDER_SOURCE_ID}
-            value={sourceId}
-            onChange={(e) => setSourceId(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') handleAdd(); }}
-          />
+                  <div>
+                    <span className={styles.rowHeaderLabel}>{EXTERNAL_SOURCE_LABELS.EVENT_ID_LABEL}</span>
+                    <TextField
+                      size="small"
+                      value={row.sourceId}
+                      placeholder={EXTERNAL_SOURCE_LABELS.ENTER_EVENT_ID_PLACEHOLDER}
+                      onChange={(e) => handleRowChange(row.localId, 'sourceId', e.target.value)}
+                      className={styles.eventIdField}
+                      inputProps={{ 'aria-label': EXTERNAL_SOURCE_LABELS.EVENT_ID_LABEL }}
+                    />
+                  </div>
 
-          <Button
-            variant="contained"
-            size="small"
-            className={styles.addBtn}
-            startIcon={<AddIcon />}
-            onClick={handleAdd}
-            disabled={!sourceType || !sourceId.trim()}
-          >
-            {BUTTON_LABELS.ADD_SOURCE}
-          </Button>
-        </div>
-
-        {/* Summary table */}
-        <div className={styles.summaryWrapper}>
-          <div className={styles.summaryHeader}>
-            <Typography className={styles.summaryHeaderCell}>
-              {EXTERNAL_SOURCE_LABELS.COLUMN_SOURCE_TYPE}
-            </Typography>
-            <Typography className={styles.summaryHeaderCell}>
-              {EXTERNAL_SOURCE_LABELS.COLUMN_SOURCE_ID}
-            </Typography>
-            <Typography className={styles.summaryHeaderCell}>
-              {EXTERNAL_SOURCE_LABELS.COLUMN_ACTIONS}
-            </Typography>
-          </div>
-
-          {data.externalSources.length === 0 ? (
-            <p className={styles.emptyNote}>{EXTERNAL_SOURCE_LABELS.SUMMARY_EMPTY}</p>
-          ) : (
-            data.externalSources.map((src) => (
-              <div key={src.id} className={styles.summaryRow}>
-                <Typography className={styles.summaryCell}>
-                  <span className={styles.typeBadge}>{src.sourceType}</span>
-                </Typography>
-                <Typography className={styles.summaryCell}>{src.sourceId}</Typography>
-                <Button
-                  size="small"
-                  className={styles.removeBtn}
-                  onClick={() => onRemoveSource(src.id)}
-                >
-                  {BUTTON_LABELS.REMOVE}
-                </Button>
-              </div>
-            ))
+                  <IconButton
+                    size="small"
+                    className={styles.deleteBtn}
+                    onClick={() => handleRemoveRow(row.localId)}
+                    aria-label="Remove row"
+                  >
+                    <DeleteOutlineIcon fontSize="small" />
+                  </IconButton>
+                </div>
+              ))}
+            </div>
           )}
-        </div>
+
+          {/* ── Add External Event ID button ── */}
+          <button type="button" className={styles.addDashedBtn} onClick={handleAddRow}>
+            {EXTERNAL_SOURCE_LABELS.ADD_EXTERNAL_EVENT_ID}
+          </button>
+
+          {/* ── Empty state ── */}
+          {isEmpty && (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyTitle}>{EXTERNAL_SOURCE_LABELS.EMPTY_STATE_TITLE}</p>
+              <p className={styles.emptySub}>{EXTERNAL_SOURCE_LABELS.EMPTY_STATE_SUB}</p>
+            </div>
+          )}
+
+          {/* ── External IDs Summary ── */}
+          {committedRows.length > 0 && (
+            <div className={styles.summarySection}>
+              <Typography className={styles.summaryTitle}>
+                {EXTERNAL_SOURCE_LABELS.SUMMARY_SECTION_TITLE}
+              </Typography>
+              <div className={styles.summaryList}>
+                {committedRows.map((row) => (
+                  <div key={row.localId} className={styles.summaryItem}>
+                    <span className={styles.summarySourceLabel}>{row.sourceType}</span>
+                    <span className={styles.summaryId}>{row.sourceId}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
         </div>{/* end fieldsBlock */}
       </div>
     </section>

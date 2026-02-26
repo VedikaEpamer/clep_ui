@@ -1,88 +1,162 @@
-/* OtherIDsSection */
+/* OtherIDsSection ── redesigned */
 
-.divider {
-  border: none;
-  border-top: 1px solid var(--color-border-light);
-  margin: 24px 0 16px;
+/* ── Add button (dashed border) ── */
+.addDashedBtn {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  background: transparent;
+  border: 1.5px dashed var(--color-border-light, #c5cdd8);
+  border-radius: var(--radius-sm, 6px);
+  color: var(--color-text-primary, #1a2332);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  margin-bottom: 12px;
 }
 
-/* ── Add source row ── */
-.addRow {
-  display: flex;
+.addDashedBtn:hover {
+  background: rgba(21, 101, 192, 0.04);
+  border-color: var(--color-primary, #1565C0);
+  color: var(--color-primary, #1565C0);
+}
+
+/* ── Empty state ── */
+.emptyState {
+  padding: 18px 20px;
+  background: var(--color-bg-subtle, #f8f9fb);
+  border: 1px solid var(--color-border-light, #e0e6ef);
+  border-radius: var(--radius-sm, 6px);
+  text-align: center;
+}
+
+.emptyTitle {
+  margin: 0 0 4px;
+  font-size: 0.875rem;
+  color: var(--color-text-primary, #1a2332);
+}
+
+.emptySub {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-primary, #1565C0);
+}
+
+/* ── Pending rows container ── */
+.rowsContainer {
+  margin-bottom: 12px;
+}
+
+/* Column header row */
+.rowHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 40px;
   gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 16px;
+  padding: 0 0 6px 0;
 }
 
-.addRow > :first-child { flex: 0 0 220px; }
-.addRow > :nth-child(2) { flex: 1; }
-
-.addBtn {
-  flex-shrink: 0;
-  margin-top: 7px !important;
-  height: 40px;
-  white-space: nowrap;
+.rowHeaderLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-secondary, #4b5563);
+  letter-spacing: 0.2px;
 }
 
-/* ── Summary table ── */
-.summaryWrapper {
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-
-.summaryHeader {
+/* Each editable entry row */
+.entryRow {
   display: grid;
-  grid-template-columns: 160px 1fr 80px;
-  background-color: var(--color-sidebar-bg);
-  padding: 8px 16px;
+  grid-template-columns: 1fr 1fr 40px;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 12px;
 }
 
-.summaryHeaderCell {
-  font-size: 0.75rem !important;
+.entryRow > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sourceSelect {
+  width: 100%;
+}
+
+.eventIdField {
+  width: 100%;
+}
+
+.placeholder {
+  color: var(--color-text-muted, #9ca3af);
+  font-style: normal;
+}
+
+/* Delete / trash icon */
+.deleteBtn {
+  color: #e53935 !important;
+  padding: 4px !important;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
+
+.deleteBtn:hover {
+  background: rgba(229, 57, 53, 0.08) !important;
+}
+
+/* ── External IDs Summary ── */
+.summarySection {
+  background: var(--color-bg-subtle, #f1f5f9);
+  border: 1px solid var(--color-border-light, #e0e6ef);
+  border-radius: var(--radius-sm, 6px);
+  padding: 12px 16px;
+}
+
+.summaryTitle {
+  font-size: 0.875rem !important;
   font-weight: 600 !important;
-  color: var(--color-white) !important;
-  letter-spacing: 0.5px;
+  color: var(--color-text-primary, #1a2332) !important;
+  margin-bottom: 10px;
 }
 
-.summaryRow {
-  display: grid;
-  grid-template-columns: 160px 1fr 80px;
-  padding: 10px 16px;
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.summaryItem {
+  display: flex;
   align-items: center;
-  border-top: 1px solid var(--color-border-light);
-}
-
-.summaryRow:hover {
-  background-color: var(--color-chip-hover-bg, #f5f5f5);
-}
-
-.summaryCell {
-  font-size: 0.83rem !important;
-  color: var(--color-text-primary) !important;
+  gap: 12px;
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid var(--color-border-light, #e0e6ef);
+  border-radius: var(--radius-sm, 6px);
 }
 
 .typeBadge {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 2px 10px;
   border-radius: 12px;
   background-color: rgba(21, 101, 192, 0.1);
-  color: var(--color-primary) !important;
-  font-size: 0.72rem !important;
-  font-weight: 600 !important;
+  color: var(--color-primary, #1565C0);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.removeBtn {
-  font-size: 0.75rem !important;
-  color: #c62828 !important;
-  padding: 2px 6px !important;
-  min-width: unset !important;
+.summarySourceLabel {
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: var(--color-text-primary, #1a2332);
+  min-width: 140px;
 }
 
-.emptyNote {
-  padding: 16px;
-  font-size: 0.83rem !important;
-  color: var(--color-text-muted) !important;
-  text-align: center;
-  font-style: italic;
+.summaryId {
+  flex: 1;
+  font-size: 0.83rem;
+  color: var(--color-text-secondary, #4b5563);
+  text-align: right;
 }

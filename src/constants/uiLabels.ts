@@ -197,6 +197,15 @@ export const EXTERNAL_SOURCE_LABELS = {
   COLUMN_ACTIONS: 'Actions',
   SELECT_SOURCE_TYPE: 'Select source type',
   PLACEHOLDER_SOURCE_ID: 'e.g., EXT-2026-001',
+  // New design labels
+  ADD_EXTERNAL_EVENT_ID: '+ Add External Event ID',
+  EXTERNAL_SOURCE_LABEL: 'External Source',
+  EVENT_ID_LABEL: 'Event ID',
+  SELECT_SOURCE_PLACEHOLDER: 'Select source',
+  ENTER_EVENT_ID_PLACEHOLDER: 'Enter external event ID',
+  EMPTY_STATE_TITLE: 'No external event IDs added yet. Click the button above to add industry or third-party event identifiers.',
+  EMPTY_STATE_SUB: 'External IDs are optional but support industry reconciliation and reporting.',
+  SUMMARY_SECTION_TITLE: 'External IDs Summary',
 } as const;
 
 // ── Review & Publish ──────────────────────────────────────────────────────────
