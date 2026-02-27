@@ -117,6 +117,36 @@ const createEventSlice = createSlice({
       state.isDirty = true;
     },
 
+    /** Toggle Track Immediately checkbox (Step 5) */
+    setTrackImmediately(state, action: PayloadAction<boolean>) {
+      state.formData.trackImmediately = action.payload;
+      state.isDirty = true;
+    },
+
+    /** Toggle a functional team on/off (Step 5) */
+    toggleFunctionalTeam(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      const idx = state.formData.functionalTeams.indexOf(id);
+      if (idx === -1) {
+        state.formData.functionalTeams.push(id);
+      } else {
+        state.formData.functionalTeams.splice(idx, 1);
+      }
+      state.isDirty = true;
+    },
+
+    /** Toggle an executive area on/off (Step 5) */
+    toggleExecutiveArea(state, action: PayloadAction<string>) {
+      const id = action.payload;
+      const idx = state.formData.executiveAreas.indexOf(id);
+      if (idx === -1) {
+        state.formData.executiveAreas.push(id);
+      } else {
+        state.formData.executiveAreas.splice(idx, 1);
+      }
+      state.isDirty = true;
+    },
+
     /** Mark form as being submitted */
     setSubmitting(state, action: PayloadAction<boolean>) {
       state.isSubmitting = action.payload;
@@ -139,6 +169,9 @@ export const {
   prevStep,
   addExternalSource,
   removeExternalSource,
+  setTrackImmediately,
+  toggleFunctionalTeam,
+  toggleExecutiveArea,
   setSubmitting,
   resetForm,
 } = createEventSlice.actions;

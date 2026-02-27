@@ -24,6 +24,9 @@ import {
   resetForm,
   addExternalSource,
   removeExternalSource,
+  setTrackImmediately,
+  toggleFunctionalTeam,
+  toggleExecutiveArea,
 } from '../../store/slices/createEventSlice';
 import type { EventFormData, ExternalSource } from '../../types/event.types';
 import { TOTAL_STEPS } from '../../data/stepConfig';
@@ -102,6 +105,21 @@ export default function CreateEventPage() {
     [dispatch]
   );
 
+  const handleTrackImmediately = useCallback(
+    (val: boolean) => dispatch(setTrackImmediately(val)),
+    [dispatch]
+  );
+
+  const handleFunctionalTeamToggle = useCallback(
+    (id: string) => dispatch(toggleFunctionalTeam(id)),
+    [dispatch]
+  );
+
+  const handleExecutiveAreaToggle = useCallback(
+    (id: string) => dispatch(toggleExecutiveArea(id)),
+    [dispatch]
+  );
+
   const handlePublish = async () => {
     dispatch(setSubmitting(true));
     try {
@@ -170,6 +188,9 @@ export default function CreateEventPage() {
         <DeadlinesTrackingSection
           data={formData}
           onChange={handleFieldChange}
+          onTrackImmediately={handleTrackImmediately}
+          onFunctionalTeamToggle={handleFunctionalTeamToggle}
+          onExecutiveAreaToggle={handleExecutiveAreaToggle}
           isActive={currentStep === 5}
         />
       </div>

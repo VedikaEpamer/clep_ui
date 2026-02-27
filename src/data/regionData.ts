@@ -210,3 +210,32 @@ export const ANALYSTS = [
   'Emily Davis',
   'Robert Wilson',
 ];
+
+export interface FunctionalTeam {
+  id: string;
+  name: string;
+  members: string;
+}
+
+export const FUNCTIONAL_TEAMS: FunctionalTeam[] = [
+  { id: 'finance',    name: 'Finance Team',          members: 'Patricia Wong, James Miller' },
+  { id: 'claims',     name: 'Claims Team',            members: 'Robert Taylor, Lisa Anderson' },
+  { id: 'cat-model',  name: 'CAT Modeler Team',       members: 'Jake Martin, Tim Chen' },
+  { id: 'reserving',  name: 'Reserving Team',         members: 'Thomas Wright, Sarah Collins' },
+  { id: 'risk-mgmt',  name: 'Risk Mgmt Team',         members: 'Michael Dawson (COO), Jennifer Becks (CFO)' },
+  { id: 'cuo-cfo',    name: 'CUO/CFO Escalation Team', members: 'Executive Leadership Team' },
+];
+
+export interface ExecutiveArea {
+  id: string;
+  name: string;
+  lead: string;
+}
+
+export const EXECUTIVE_AREAS: ExecutiveArea[] = [
+  { id: 'na-treaty',   name: 'North America Treaty', lead: 'Michael Rodriguez' },
+  { id: 'intl-treaty', name: 'International Treaty', lead: 'Sarah Chen' },
+  { id: 'na-fac',      name: 'North America Fac',    lead: 'David Thompson' },
+  { id: 'specialties', name: 'Specialties',          lead: 'Jennifer Williams' },
+  { id: 'intl-fac',    name: 'International Fac',    lead: 'Robert Anderson' },
+];

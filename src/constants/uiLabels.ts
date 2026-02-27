@@ -67,9 +67,21 @@ export const SECTION_LABELS = {
     'These fields provide context for leadership and are referenced in UW estimation comparisons, but do not directly control contract-level calculations in Phase 1.',
 
   // Step 5
-  DEADLINES_HEADING: 'Workflow Deadlines & Assignment',
+  DEADLINES_HEADING: 'Deadlines & Operational Tracking',
   DEADLINES_DESCRIPTION:
-    'Set key deadlines and assign the event to the appropriate analysts for tracking and escalation management.',
+    'Define the operational timeline for the event and determine when the workflow officially begins.',
+  TRACK_IMMEDIATELY_LABEL: 'Track Immediately \u2013 Kick Off Workflow',
+  TRACK_IMMEDIATELY_DESCRIPTION:
+    'Activates the event immediately after publishing, starts the countdown for operational deadlines, and triggers notifications to assigned participants.',
+  WORKFLOW_DEADLINES_HEADING: 'Workflow Deadlines',
+  FUNCTIONAL_TEAMS_HEADING: 'Select Functional Teams to Notify',
+  FUNCTIONAL_TEAMS_DESCRIPTION: 'Team(s) to be notified when Support event assessment',
+  EXECUTIVE_AREAS_HEADING: 'Select Executive Areas to Notify',
+  EXECUTIVE_AREAS_DESCRIPTION: 'Executive area(s) to be notified for event oversight',
+  ADDITIONAL_RECIPIENTS_LABEL: 'Additional Recipients (Optional)',
+  ADDITIONAL_RECIPIENTS_DESCRIPTION:
+    'Enter email addresses for individual underwriters, regional leads, or ad-hoc stakeholders (comma-separated)',
+  NOTIFICATION_SUMMARY_HEADING: 'Notification Summary',
 
   // Step 3 – External Sources sub-section
   EXTERNAL_SOURCES_HEADING: 'External Sources',
@@ -123,6 +135,12 @@ export const FIELD_LABELS = {
   ASSIGNED_ANALYST: 'Assigned Analyst *',
   REVIEWER_NAME: 'Reviewer Name',
   NOTES: 'Notes',
+  OPERATIONAL_SUMMARY: 'Operational Summary',
+  HIGH_LEVEL_EXPOSURE_DEADLINE: 'High-Level Exposure Estimates Deadline',
+  CONTRACT_LEVEL_DEADLINE: 'Contract-Level Estimates Deadline',
+  RESERVING_EXTRACT_DEADLINE: 'Reserving Extract Deadline',
+  CAT_MODEL_RUN_DEADLINE: 'CAT Model Run Updates Deadline',
+  ADDITIONAL_RECIPIENTS: 'Additional Recipients (Optional)',
 } as const;
 
 // ── Placeholders ──────────────────────────────────────────────────────────────
@@ -166,13 +184,13 @@ export const HELPER_TEXTS = {
 
 // ── Button Labels ─────────────────────────────────────────────────────────────
 export const BUTTON_LABELS = {
-  SAVE_DRAFT: 'Save Draft',
+  SAVE_DRAFT: 'Save as Draft',
   EXPORT_PDF: 'Export PDF',
   CANCEL: 'Cancel',
   BACK: 'Back',
   NEXT: 'Next',
   SUBMIT: 'Submit',
-  PUBLISH: 'Publish Event',
+  PUBLISH: 'Publish & Notify',
   ADD_SOURCE: 'Add Source',
   REMOVE: 'Remove',
 } as const;

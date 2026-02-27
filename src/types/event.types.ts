@@ -54,6 +54,16 @@ export interface EventFormData {
   marketShare: string;
 
   // Step 5 – Deadlines & Tracking
+  trackImmediately: boolean;
+  operationalSummary: string;
+  highLevelExposureDeadline: string;
+  contractLevelDeadline: string;
+  reservingExtractDeadline: string;
+  catModelRunDeadline: string;
+  functionalTeams: string[];
+  executiveAreas: string[];
+  additionalRecipients: string;
+  // legacy
   lossPickDeadline: string;
   finalSubmissionDeadline: string;
   assignedAnalyst: string;
@@ -93,6 +103,15 @@ export const initialFormData: EventFormData = {
   industryLossSource: '',
   industryLossDate: '',
   marketShare: '',
+  trackImmediately: false,
+  operationalSummary: '',
+  highLevelExposureDeadline: '',
+  contractLevelDeadline: '',
+  reservingExtractDeadline: '',
+  catModelRunDeadline: '',
+  functionalTeams: [],
+  executiveAreas: [],
+  additionalRecipients: '',
   lossPickDeadline: '',
   finalSubmissionDeadline: '',
   assignedAnalyst: '',
